@@ -110,22 +110,22 @@ function Navbar() {
 // ─── Hero Section ────────────────────────────────────────────────
 // ─── Tech Stack Icons ────────────────────────────────────────────
 // ─── Browser Mockup ──────────────────────────────────────────────
+const codeLines = [
+  { indent: 0, tokens: [{ t: 'keyword', v: 'const ' }, { t: 'fn', v: 'Hero' }, { t: 'plain', v: ' = () => (' }] },
+  { indent: 1, tokens: [{ t: 'tag', v: '<section ' }, { t: 'attr', v: 'className' }, { t: 'plain', v: '=' }, { t: 'str', v: '"hero"' }, { t: 'tag', v: '>' }] },
+  { indent: 2, tokens: [{ t: 'tag', v: '<h1 ' }, { t: 'attr', v: 'className' }, { t: 'plain', v: '=' }, { t: 'str', v: '"hero-title"' }, { t: 'tag', v: '>' }] },
+  { indent: 3, tokens: [{ t: 'plain', v: 'Design that ' }, { t: 'accent', v: 'converts.' }] },
+  { indent: 2, tokens: [{ t: 'tag', v: '</h1>' }] },
+  { indent: 2, tokens: [{ t: 'tag', v: '<p>' }, { t: 'plain', v: 'Code that ' }, { t: 'accent', v: 'scales.' }, { t: 'tag', v: '</p>' }] },
+  { indent: 2, tokens: [{ t: 'tag', v: '<button ' }, { t: 'attr', v: 'className' }, { t: 'plain', v: '=' }, { t: 'str', v: '"btn-primary"' }, { t: 'tag', v: '>' }] },
+  { indent: 3, tokens: [{ t: 'plain', v: 'Start a Project →' }] },
+  { indent: 2, tokens: [{ t: 'tag', v: '</button>' }] },
+  { indent: 1, tokens: [{ t: 'tag', v: '</section>' }] },
+  { indent: 0, tokens: [{ t: 'plain', v: ');' }] },
+];
+
 function BrowserMockup() {
   const [activeLine, setActiveLine] = useState(0);
-
-  const codeLines = [
-    { indent: 0, tokens: [{ t: 'keyword', v: 'const ' }, { t: 'fn', v: 'Hero' }, { t: 'plain', v: ' = () => (' }] },
-    { indent: 1, tokens: [{ t: 'tag', v: '<section ' }, { t: 'attr', v: 'className', }, { t: 'plain', v: '=' }, { t: 'str', v: '"hero"' }, { t: 'tag', v: '>' }] },
-    { indent: 2, tokens: [{ t: 'tag', v: '<h1 ' }, { t: 'attr', v: 'className' }, { t: 'plain', v: '=' }, { t: 'str', v: '"hero-title"' }, { t: 'tag', v: '>' }] },
-    { indent: 3, tokens: [{ t: 'plain', v: 'Design that ' }, { t: 'accent', v: 'converts.' }] },
-    { indent: 2, tokens: [{ t: 'tag', v: '</h1>' }] },
-    { indent: 2, tokens: [{ t: 'tag', v: '<p>' }, { t: 'plain', v: 'Code that ' }, { t: 'accent', v: 'scales.' }, { t: 'tag', v: '</p>' }] },
-    { indent: 2, tokens: [{ t: 'tag', v: '<button ' }, { t: 'attr', v: 'className' }, { t: 'plain', v: '=' }, { t: 'str', v: '"btn-primary"' }, { t: 'tag', v: '>' }] },
-    { indent: 3, tokens: [{ t: 'plain', v: 'Start a Project →' }] },
-    { indent: 2, tokens: [{ t: 'tag', v: '</button>' }] },
-    { indent: 1, tokens: [{ t: 'tag', v: '</section>' }] },
-    { indent: 0, tokens: [{ t: 'plain', v: ');' }] },
-  ];
 
   useEffect(() => {
     const t = setInterval(() => {
