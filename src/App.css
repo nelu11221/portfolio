@@ -490,7 +490,6 @@ body {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   cursor: grab;
-  padding-bottom: 4px;
   width: 100%;
 }
 
@@ -498,21 +497,12 @@ body {
 .slider-track-wrapper:active { cursor: grabbing; }
 
 .slider-track {
-  display: flex;
+  display: inline-flex;
   gap: 24px;
-  padding: 0 60px;    /* desktop: show multiple cards */
-}
-
-/* Mobile: center single card */
-@media (max-width: 768px) {
-  .slider-track {
-    padding: 0 !important;
-  }
-  .slider-track::before,
-  .slider-track::after {
-    content: '';
-    flex: 0 0 calc((100vw - 280px) / 2);
-  }
+  /* side padding = (viewport - cardWidth) / 2 so first card is centered */
+  padding-left:  max(60px, calc((100% - 320px) / 2));
+  padding-right: max(60px, calc((100% - 320px) / 2));
+  box-sizing: content-box;
 }
 
 /* ─── PROJECT CARD ─── */
@@ -2313,7 +2303,6 @@ body {
   .navbar { padding: 16px 24px; }
   .hero { padding: 100px 24px 80px; }
   .slider-header { padding: 0 24px; }
-  .slider-track { padding: 0 24px; }
   .services-grid { grid-template-columns: 1fr 1fr; }
   .about-inner { grid-template-columns: 1fr; gap: 60px; }
   .process-layout { grid-template-columns: 1fr; gap: 48px; }
@@ -2359,7 +2348,6 @@ body {
   .slider-section { padding: 60px 0; }
   .slider-header { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
   .slider-controls { align-self: flex-start; margin-top: 4px; }
-  .project-card { flex: 0 0 calc(100vw - 48px); max-width: 380px; }
   .card-title { font-size: 1rem; }
 
   /* About */
@@ -2422,7 +2410,6 @@ body {
   .faq-section,
   .contact-section { padding: 48px 16px; }
   .footer { padding: 40px 16px 20px; }
-  .project-card { flex: 0 0 calc(100vw - 32px); }
   .testi-stats-row { gap: 10px; }
   .testi-stat { flex: 0 0 100%; text-align: center; }
   .cs-meta-row { grid-template-columns: 1fr 1fr; }
