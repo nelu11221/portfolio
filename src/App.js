@@ -397,76 +397,76 @@ function CaseStudy({ project, onClose }) {
           </div>
         </div>
 
-        {/* Hero image */}
-        <div className="cs-hero-img">
-          <img src={project.image} alt={project.title} />
-          <div className="cs-hero-overlay">
-            <h1 className="cs-title">{project.title}</h1>
-            <p className="cs-subtitle">{project.year} · {project.client}</p>
-          </div>
-        </div>
-
-        {/* Content */}
+        {/* Scrollable body */}
         <div className="cs-content">
-          {/* Meta row */}
-          <div className="cs-meta-row">
-            {[
-              { label: 'Client', value: project.client },
-              { label: 'Year', value: project.year },
-              { label: 'Duration', value: project.duration },
-              { label: 'My Role', value: project.role },
-            ].map(m => (
-              <div className="cs-meta-item" key={m.label}>
-                <span className="cs-meta-label">{m.label}</span>
-                <span className="cs-meta-value">{m.value}</span>
+          {/* Hero image */}
+          <div className="cs-hero-img">
+            <img src={project.image} alt={project.title} />
+            <div className="cs-hero-overlay">
+              <h1 className="cs-title">{project.title}</h1>
+              <p className="cs-subtitle">{project.year} · {project.client}</p>
+            </div>
+          </div>
+
+          <div className="cs-body">
+            {/* Meta row */}
+            <div className="cs-meta-row">
+              {[
+                { label: 'Client', value: project.client },
+                { label: 'Year', value: project.year },
+                { label: 'Duration', value: project.duration },
+                { label: 'My Role', value: project.role },
+              ].map(m => (
+                <div className="cs-meta-item" key={m.label}>
+                  <span className="cs-meta-label">{m.label}</span>
+                  <span className="cs-meta-value">{m.value}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Results */}
+            <div className="cs-results">
+              {project.results.map(r => (
+                <div className="cs-result-card" key={r.label}>
+                  <div className="cs-result-value">{r.value}</div>
+                  <div className="cs-result-label">{r.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Text sections */}
+            <div className="cs-sections">
+              <div className="cs-section">
+                <h3 className="cs-section-title">
+                  <span className="cs-section-num">01</span> Overview
+                </h3>
+                <p className="cs-section-text">{project.overview}</p>
               </div>
-            ))}
-          </div>
-
-          {/* Results */}
-          <div className="cs-results">
-            {project.results.map(r => (
-              <div className="cs-result-card" key={r.label}>
-                <div className="cs-result-value">{r.value}</div>
-                <div className="cs-result-label">{r.label}</div>
+              <div className="cs-section">
+                <h3 className="cs-section-title">
+                  <span className="cs-section-num">02</span> The Challenge
+                </h3>
+                <p className="cs-section-text">{project.challenge}</p>
               </div>
-            ))}
-          </div>
+              <div className="cs-section">
+                <h3 className="cs-section-title">
+                  <span className="cs-section-num">03</span> The Solution
+                </h3>
+                <p className="cs-section-text">{project.solution}</p>
+              </div>
+            </div>
 
-          {/* Text sections */}
-          <div className="cs-sections">
-            <div className="cs-section">
-              <h3 className="cs-section-title">
-                <span className="cs-section-num">01</span> Overview
-              </h3>
-              <p className="cs-section-text">{project.overview}</p>
-            </div>
-            <div className="cs-section">
-              <h3 className="cs-section-title">
-                <span className="cs-section-num">02</span> The Challenge
-              </h3>
-              <p className="cs-section-text">{project.challenge}</p>
-            </div>
-            <div className="cs-section">
-              <h3 className="cs-section-title">
-                <span className="cs-section-num">03</span> The Solution
-              </h3>
-              <p className="cs-section-text">{project.solution}</p>
-            </div>
-          </div>
-
-          {/* Second image */}
-          <div className="cs-gallery">
+            {/* Gallery image */}
             <img src={project.images[1]} alt={project.title + ' detail'} className="cs-gallery-img" />
-          </div>
 
-          {/* CTA */}
-          <div className="cs-cta">
-            <p className="cs-cta-text">Like what you see?</p>
-            <a href="#contact" className="btn-primary" onClick={onClose}>
-              <span>Start a Project</span>
-              <span>→</span>
-            </a>
+            {/* CTA */}
+            <div className="cs-cta">
+              <p className="cs-cta-text">Like what you see?</p>
+              <a href="#contact" className="btn-primary" onClick={onClose}>
+                <span>Start a Project</span>
+                <span>→</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
