@@ -1719,8 +1719,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
   flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.testi-avatar:hover {
+  box-shadow: 0 0 16px rgba(79,110,247,0.2);
 }
 
 .testi-author { flex: 1; min-width: 0; }
