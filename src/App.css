@@ -491,19 +491,17 @@ body {
   scrollbar-width: none;
   cursor: grab;
   padding-bottom: 4px;
-  display: flex;
+  width: 100%;
 }
 
 .slider-track-wrapper::-webkit-scrollbar { display: none; }
-
 .slider-track-wrapper:active { cursor: grabbing; }
 
 .slider-track {
   display: flex;
   gap: 24px;
   padding: 0 60px;
-  width: max-content;
-  margin: 0 auto;
+  /* center cards: leading padding pushes first card to center */
 }
 
 /* ─── PROJECT CARD ─── */
