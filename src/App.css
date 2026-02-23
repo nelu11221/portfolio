@@ -2196,7 +2196,7 @@ body {
   border: none;
   cursor: pointer;
   padding: 4px;
-  z-index: 1100;
+  z-index: 1200;
   position: relative;
 }
 
@@ -2248,27 +2248,6 @@ body {
 }
 
 .mobile-drawer-logo span { color: var(--accent); }
-
-/* Close button inside drawer */
-.mobile-drawer-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--white);
-  font-size: 1.1rem;
-  transition: background 0.2s ease;
-}
-
-.mobile-drawer-close:hover { background: rgba(255,255,255,0.12); }
 
 /* Nav links */
 .mobile-link {

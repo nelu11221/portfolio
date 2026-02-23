@@ -207,7 +207,6 @@ function Navbar() {
       {menuOpen && (
         <div className="mobile-drawer">
           <div className="mobile-drawer-logo">Cod<span>][</span>ng</div>
-          <button className="mobile-drawer-close" onClick={close}>✕</button>
           <a href="#about"     className="mobile-link" onClick={close}>About</a>
           <a href="#portfolio" className="mobile-link" onClick={close}>Portfolio</a>
           <a href="#services"  className="mobile-link" onClick={close}>Services</a>
