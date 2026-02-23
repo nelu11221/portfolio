@@ -10,6 +10,19 @@ const projects = [
     title: 'ShopFlow – E-commerce Redesign',
     desc: 'Full redesign of a fashion e-commerce platform, boosting conversion rate by 38%.',
     year: '2024',
+    client: 'ShopFlow Inc.',
+    duration: '6 weeks',
+    role: 'UI/UX Designer & Frontend Developer',
+    overview: 'ShopFlow came to us with a dated e-commerce platform that was bleeding potential customers. The checkout abandonment rate was over 70% and the mobile experience was practically unusable. We rebuilt everything from the ground up — research, architecture, design system, and React implementation.',
+    challenge: 'The core challenge was simplifying a 9-step checkout process without losing the trust signals and upsell opportunities the business depended on. Every decision had to be validated against real user data.',
+    solution: 'We condensed checkout to 3 steps using a progressive disclosure pattern, redesigned the product pages with social proof at every scroll point, and rebuilt the mobile nav from scratch using thumb-zone research.',
+    results: [
+      { label: 'Conversion Rate', value: '+38%' },
+      { label: 'Cart Abandonment', value: '-52%' },
+      { label: 'Mobile Sessions', value: '+91%' },
+      { label: 'Page Load Time', value: '-1.4s' },
+    ],
+    images: ['/images/project1.jpg', '/images/project1.jpg'],
   },
   {
     id: 2,
@@ -18,6 +31,19 @@ const projects = [
     title: 'Nexus Analytics Dashboard',
     desc: 'Real-time data visualization platform for SaaS teams with dark-mode-first design.',
     year: '2024',
+    client: 'Nexus Labs',
+    duration: '3 weeks',
+    role: 'Product Designer & Frontend Developer',
+    overview: 'Nexus needed a real-time analytics dashboard that their enterprise clients could white-label. The existing solution was a tangled mix of third-party widgets that looked inconsistent and performed poorly under heavy data loads.',
+    challenge: 'Displaying live data across 12+ chart types without UI jank, while keeping the interface clean enough for non-technical users to interpret at a glance.',
+    solution: 'We designed a modular widget system with a dark-mode-first aesthetic, built on Next.js with server-side data streaming. Each chart was custom-built for performance, with skeleton loaders and graceful empty states.',
+    results: [
+      { label: 'Load Performance', value: '+3x faster' },
+      { label: 'User Satisfaction', value: '4.9 / 5' },
+      { label: 'Churn Reduction', value: '-28%' },
+      { label: 'Delivery Time', value: '3 weeks' },
+    ],
+    images: ['/images/project2.jpg', '/images/project2.jpg'],
   },
   {
     id: 3,
@@ -26,6 +52,19 @@ const projects = [
     title: 'Lumina Brand Identity',
     desc: 'Complete visual identity system for a creative studio — logo, type, motion guidelines.',
     year: '2023',
+    client: 'Lumina Creative Studio',
+    duration: '4 weeks',
+    role: 'Brand Designer & Motion Artist',
+    overview: 'Lumina was launching as a premium creative studio and needed a brand identity that communicated elegance, creativity, and technical precision simultaneously. The identity had to work across print, digital, and motion contexts.',
+    challenge: 'Creating a mark that felt premium without being cold, creative without being chaotic — and that could animate beautifully for their showreel intros.',
+    solution: 'We developed a wordmark with a custom ligature between the L and i, paired with a modular grid system for layouts and a motion language built around light refracting through glass.',
+    results: [
+      { label: 'Brand Recognition', value: 'Immediate' },
+      { label: 'New Clients (Q1)', value: '+4 signed' },
+      { label: 'Press Features', value: '3 publications' },
+      { label: 'Awwwards', value: 'Honorable Mention' },
+    ],
+    images: ['/images/project3.jpg', '/images/project3.jpg'],
   },
   {
     id: 4,
@@ -34,6 +73,19 @@ const projects = [
     title: 'FitTrack Mobile App',
     desc: 'Fitness tracking app UI designed for clarity under pressure — built for serious athletes.',
     year: '2023',
+    client: 'FitTrack',
+    duration: '5 weeks',
+    role: 'Mobile UI/UX Designer',
+    overview: 'FitTrack is a serious fitness tracking app for athletes who train in high-pressure environments. The existing UI failed during workouts — too many taps, too much information, fonts too small to read mid-exercise.',
+    challenge: 'Designing an interface that works when your hands are sweaty, your heart rate is 180bpm, and you have 3 seconds to log a set. Clarity and speed were the only metrics that mattered.',
+    solution: 'We introduced a one-handed mode, large touch targets, high-contrast color coding for effort zones, and a persistent workout HUD that shows only what matters mid-session.',
+    results: [
+      { label: 'App Store Rating', value: '4.9 ★' },
+      { label: 'Daily Active Users', value: '+67%' },
+      { label: 'Session Logging', value: '+83% faster' },
+      { label: 'User Retention', value: '+41%' },
+    ],
+    images: ['/images/project4.jpg', '/images/project4.jpg'],
   },
   {
     id: 5,
@@ -42,6 +94,19 @@ const projects = [
     title: 'Vertex Agency Website',
     desc: 'Immersive agency portfolio with WebGL backgrounds and scroll-driven storytelling.',
     year: '2023',
+    client: 'Vertex Agency',
+    duration: '5 weeks',
+    role: 'Creative Developer & Designer',
+    overview: 'Vertex is a creative agency that needed a website as impressive as the work they sell. Their previous site was a generic WordPress theme that embarrassed them in client pitches.',
+    challenge: 'Building a site that demonstrates creative and technical capability without sacrificing performance. Every animation had to feel intentional, not gratuitous.',
+    solution: 'We designed and built a scroll-driven narrative using GSAP ScrollTrigger, with WebGL particle backgrounds, a custom work showcase with smooth transitions, and sub-2s load time despite the visual richness.',
+    results: [
+      { label: 'Awwwards', value: 'Honorable Mention' },
+      { label: 'Inbound Leads', value: '+120%' },
+      { label: 'Avg. Session', value: '4m 32s' },
+      { label: 'Bounce Rate', value: '-38%' },
+    ],
+    images: ['/images/project5.jpg', '/images/project5.jpg'],
   },
   {
     id: 6,
@@ -50,6 +115,19 @@ const projects = [
     title: 'Dimora del Tramonto',
     desc: 'Full brand identity for a luxury hospitality venue — logo, typography, print collateral, and visual guidelines.',
     year: '2024',
+    client: 'Dimora del Tramonto',
+    duration: '4 weeks',
+    role: 'Brand Designer',
+    overview: 'Dimora del Tramonto is a luxury agriturismo in southern Italy seeking to attract high-end international guests. Their existing visual identity was misaligned with their premium positioning and failing to communicate the warmth and authenticity of the experience.',
+    challenge: 'Capturing the essence of golden-hour Puglia — terracotta, olive groves, slow living — in a mark that also feels sophisticated enough for a €500/night property.',
+    solution: 'We built an identity around a custom serif logotype with hand-drawn olive branch motif, a warm earthy palette, and bespoke print collateral including menus, room cards, and a brand book.',
+    results: [
+      { label: 'Booking Inquiries', value: '+74%' },
+      { label: 'Avg. Booking Value', value: '+28%' },
+      { label: 'Press Features', value: '2 magazines' },
+      { label: 'Social Followers', value: '+3,200' },
+    ],
+    images: ['/images/project6.jpg', '/images/project6.jpg'],
   },
   {
     id: 7,
@@ -58,6 +136,19 @@ const projects = [
     title: 'Artmedia Branding',
     desc: 'Creative brand system for a media production company — bold visuals, motion identity, and digital assets.',
     year: '2024',
+    client: 'Artmedia Production',
+    duration: '3 weeks',
+    role: 'Brand Designer & Motion Designer',
+    overview: 'Artmedia is a rising media production company that needed a brand identity bold enough to stand out in a crowded market, with a motion language that could bring their reels, titles, and social content to life.',
+    challenge: 'The identity had to work across both corporate video productions and creative art projects — a wide tonal range that required a flexible but cohesive design system.',
+    solution: 'We developed a bold geometric mark with a dynamic color system that shifts between professional deep navy and vibrant gradient modes depending on context, paired with kinetic typography guidelines for motion.',
+    results: [
+      { label: 'Brand Perception', value: 'Premium ↑' },
+      { label: 'New Contracts', value: '+5 in 60 days' },
+      { label: 'Social Engagement', value: '+210%' },
+      { label: 'Pitch Win Rate', value: '+35%' },
+    ],
+    images: ['/images/project7.jpg', '/images/project7.jpg'],
   },
 ];
 
@@ -278,10 +369,115 @@ function Hero() {
   );
 }
 
-// ─── Project Card ────────────────────────────────────────────────
-function ProjectCard({ project }) {
+// ─── Case Study Page ─────────────────────────────────────────────
+function CaseStudy({ project, onClose }) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', handleKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKey);
+    };
+  }, [onClose]);
+
   return (
-    <div className="project-card">
+    <div className="cs-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="cs-panel">
+        {/* Header */}
+        <div className="cs-header">
+          <button className="cs-back" onClick={onClose}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M19 12H5M5 12l7-7M5 12l7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Back to work
+          </button>
+          <div className="cs-header-tags">
+            {project.tags.map(t => <span className="tag" key={t}>{t}</span>)}
+          </div>
+        </div>
+
+        {/* Hero image */}
+        <div className="cs-hero-img">
+          <img src={project.image} alt={project.title} />
+          <div className="cs-hero-overlay">
+            <h1 className="cs-title">{project.title}</h1>
+            <p className="cs-subtitle">{project.year} · {project.client}</p>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="cs-content">
+          {/* Meta row */}
+          <div className="cs-meta-row">
+            {[
+              { label: 'Client', value: project.client },
+              { label: 'Year', value: project.year },
+              { label: 'Duration', value: project.duration },
+              { label: 'My Role', value: project.role },
+            ].map(m => (
+              <div className="cs-meta-item" key={m.label}>
+                <span className="cs-meta-label">{m.label}</span>
+                <span className="cs-meta-value">{m.value}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Results */}
+          <div className="cs-results">
+            {project.results.map(r => (
+              <div className="cs-result-card" key={r.label}>
+                <div className="cs-result-value">{r.value}</div>
+                <div className="cs-result-label">{r.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Text sections */}
+          <div className="cs-sections">
+            <div className="cs-section">
+              <h3 className="cs-section-title">
+                <span className="cs-section-num">01</span> Overview
+              </h3>
+              <p className="cs-section-text">{project.overview}</p>
+            </div>
+            <div className="cs-section">
+              <h3 className="cs-section-title">
+                <span className="cs-section-num">02</span> The Challenge
+              </h3>
+              <p className="cs-section-text">{project.challenge}</p>
+            </div>
+            <div className="cs-section">
+              <h3 className="cs-section-title">
+                <span className="cs-section-num">03</span> The Solution
+              </h3>
+              <p className="cs-section-text">{project.solution}</p>
+            </div>
+          </div>
+
+          {/* Second image */}
+          <div className="cs-gallery">
+            <img src={project.images[1]} alt={project.title + ' detail'} className="cs-gallery-img" />
+          </div>
+
+          {/* CTA */}
+          <div className="cs-cta">
+            <p className="cs-cta-text">Like what you see?</p>
+            <a href="#contact" className="btn-primary" onClick={onClose}>
+              <span>Start a Project</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Project Card ────────────────────────────────────────────────
+function ProjectCard({ project, onOpen }) {
+  return (
+    <div className="project-card" onClick={() => onOpen(project)}>
       <div className="card-image">
         <img
           src={project.image}
@@ -310,6 +506,7 @@ function ProjectCard({ project }) {
 function ProjectSlider() {
   const trackRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
   const cardWidth = 380 + 24; // card + gap
   const maxIdx = projects.length - 1;
 
@@ -372,8 +569,9 @@ function ProjectSlider() {
         onTouchEnd={handleTouchEnd}
       >
         <div className="slider-track" ref={trackRef}>
+          {selectedProject && <CaseStudy project={selectedProject} onClose={() => setSelectedProject(null)} />}
           {projects.map((p) => (
-            <ProjectCard key={p.id} project={p} />
+            <ProjectCard key={p.id} project={p} onOpen={setSelectedProject} />
           ))}
         </div>
       </div>
