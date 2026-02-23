@@ -382,8 +382,7 @@ function CaseStudy({ project, onClose }) {
   }, [onClose]);
 
   return (
-    <div className="cs-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="cs-panel">
+    <div className="cs-page">
         {/* Header */}
         <div className="cs-header">
           <button className="cs-back" onClick={onClose}>
@@ -469,7 +468,6 @@ function CaseStudy({ project, onClose }) {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }
@@ -503,10 +501,9 @@ function ProjectCard({ project, onOpen }) {
 }
 
 // ─── Slider Section ──────────────────────────────────────────────
-function ProjectSlider() {
+function ProjectSlider({ onOpen }) {
   const trackRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [selectedProject, setSelectedProject] = useState(null);
   const cardWidth = 380 + 24; // card + gap
   const maxIdx = projects.length - 1;
 
@@ -569,9 +566,8 @@ function ProjectSlider() {
         onTouchEnd={handleTouchEnd}
       >
         <div className="slider-track" ref={trackRef}>
-          {selectedProject && <CaseStudy project={selectedProject} onClose={() => setSelectedProject(null)} />}
           {projects.map((p) => (
-            <ProjectCard key={p.id} project={p} onOpen={setSelectedProject} />
+            <ProjectCard key={p.id} project={p} onOpen={onOpen} />
           ))}
         </div>
       </div>
@@ -1405,12 +1401,33 @@ function Footer() {
 
 // ─── App ─────────────────────────────────────────────────────────
 function App() {
+  const [activePage, setActivePage] = useState(null); // null = main site, project = case study
+
+  const openCase = (project) => {
+    setActivePage(project);
+    window.scrollTo(0, 0);
+  };
+
+  const closeCase = () => {
+    setActivePage(null);
+    window.scrollTo(0, 0);
+  };
+
+  if (activePage) {
+    return (
+      <div className="App">
+        <CustomCursor />
+        <CaseStudy project={activePage} onClose={closeCase} />
+      </div>
+    );
+  }
+
   return (
     <div className="App">
       <CustomCursor />
       <Navbar />
       <Hero />
-      <ProjectSlider />
+      <ProjectSlider onOpen={openCase} />
       <About />
       <Services />
       <Process />
