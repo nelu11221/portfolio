@@ -528,46 +528,41 @@ function ProjectCard({ project, onOpen }) {
 
 // ─── Slider Section ──────────────────────────────────────────────
 function ProjectSlider({ onOpen }) {
-  const trackRef = useRef(null);
+  const wrapperRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
-  const cardWidth = 380 + 24; // card + gap
+  const touchStart = useRef(0);
   const maxIdx = projects.length - 1;
 
-  // Drag state
-  const drag = useRef({ startX: 0, scrollLeft: 0, isDown: false });
+  const getCardWidth = () => {
+    if (!wrapperRef.current) return 404;
+    const card = wrapperRef.current.querySelector('.project-card');
+    if (!card) return 404;
+    return card.offsetWidth + 24; // card + gap
+  };
 
   const goTo = (idx) => {
     const clamped = Math.max(0, Math.min(idx, maxIdx));
     setActiveIdx(clamped);
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(-${clamped * cardWidth}px)`;
+    if (wrapperRef.current) {
+      wrapperRef.current.scrollTo({
+        left: clamped * getCardWidth(),
+        behavior: 'smooth',
+      });
     }
   };
 
-  // Mouse drag
-  const handleMouseDown = (e) => {
-    drag.current.isDown = true;
-    drag.current.startX = e.pageX;
-    drag.current.currentIdx = activeIdx;
+  // Sync dot indicator while user scrolls freely
+  const handleScroll = () => {
+    if (!wrapperRef.current) return;
+    const idx = Math.round(wrapperRef.current.scrollLeft / getCardWidth());
+    setActiveIdx(Math.max(0, Math.min(idx, maxIdx)));
   };
 
-  const handleMouseUp = (e) => {
-    if (!drag.current.isDown) return;
-    drag.current.isDown = false;
-    const diff = drag.current.startX - e.pageX;
-    if (Math.abs(diff) > 60) {
-      goTo(activeIdx + (diff > 0 ? 1 : -1));
-    }
-  };
-
-  // Touch
-  const handleTouchStart = (e) => {
-    drag.current.startX = e.touches[0].pageX;
-  };
-
+  // Touch swipe
+  const handleTouchStart = (e) => { touchStart.current = e.touches[0].clientX; };
   const handleTouchEnd = (e) => {
-    const diff = drag.current.startX - e.changedTouches[0].pageX;
-    if (Math.abs(diff) > 50) goTo(activeIdx + (diff > 0 ? 1 : -1));
+    const diff = touchStart.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(activeIdx + (diff > 0 ? 1 : -1));
   };
 
   return (
@@ -578,20 +573,19 @@ function ProjectSlider({ onOpen }) {
           <h2 className="section-title">Projects that<br />made an impact</h2>
         </div>
         <div className="slider-controls">
-          <button className="slider-btn" onClick={() => goTo(activeIdx - 1)}>←</button>
-          <button className="slider-btn" onClick={() => goTo(activeIdx + 1)}>→</button>
+          <button className="slider-btn" onClick={() => goTo(activeIdx - 1)} disabled={activeIdx === 0}>←</button>
+          <button className="slider-btn" onClick={() => goTo(activeIdx + 1)} disabled={activeIdx === maxIdx}>→</button>
         </div>
       </div>
 
       <div
         className="slider-track-wrapper"
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+        ref={wrapperRef}
+        onScroll={handleScroll}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="slider-track" ref={trackRef}>
+        <div className="slider-track">
           {projects.map((p) => (
             <ProjectCard key={p.id} project={p} onOpen={onOpen} />
           ))}
