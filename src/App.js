@@ -206,7 +206,6 @@ function Navbar() {
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="mobile-drawer">
-          <div className="mobile-drawer-logo">Cod<span>][</span>ng</div>
           <a href="#about"     className="mobile-link" onClick={close}>About</a>
           <a href="#portfolio" className="mobile-link" onClick={close}>Portfolio</a>
           <a href="#services"  className="mobile-link" onClick={close}>Services</a>
