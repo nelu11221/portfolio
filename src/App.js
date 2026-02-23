@@ -1026,9 +1026,9 @@ const contactInfoItems = [
 
 // ─── Contact Section ──────────────────────────────────────────────
 // EmailJS config — replace with your real IDs from emailjs.com
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'service_w0bf1rd';
+const EMAILJS_TEMPLATE_ID = 'template_xtotbgx';
+const EMAILJS_PUBLIC_KEY  = 'dzh_MYVldtKHUDQQG';
 
 function Contact() {
   const [form, setForm] = useState({ name: '', email: '', budget: '', message: '' });
