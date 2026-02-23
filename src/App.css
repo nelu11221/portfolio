@@ -506,7 +506,7 @@ body {
 
 /* ─── PROJECT CARD ─── */
 .project-card {
-  flex: 0 0 380px;
+  flex: 0 0 320px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -528,7 +528,7 @@ body {
 
 .card-image {
   width: 100%;
-  height: 220px;
+  height: 180px;
   position: relative;
   overflow: hidden;
 }
