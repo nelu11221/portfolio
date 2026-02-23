@@ -528,31 +528,22 @@ function ProjectCard({ project, onOpen }) {
 
 // ─── Slider Section ──────────────────────────────────────────────
 function ProjectSlider({ onOpen }) {
-  const wrapperRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const touchStart = useRef(0);
   const maxIdx = projects.length - 1;
+  const [cardW, setCardW] = useState(344);
+  const cardRef = useRef(null);
 
-  const getCardWidth = () => {
-    if (!wrapperRef.current) return 344;
-    const card = wrapperRef.current.querySelector('.project-card');
-    if (!card) return 344;
-    return card.offsetWidth + 24;
-  };
+  useEffect(() => {
+    const measure = () => {
+      if (cardRef.current) setCardW(cardRef.current.offsetWidth + 24);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
 
   const goTo = (idx) => {
-    const clamped = Math.max(0, Math.min(idx, maxIdx));
-    setActiveIdx(clamped);
-    if (!wrapperRef.current) return;
-    wrapperRef.current.scrollTo({
-      left: clamped * getCardWidth(),
-      behavior: 'smooth',
-    });
-  };
-
-  const handleScroll = () => {
-    if (!wrapperRef.current) return;
-    const idx = Math.round(wrapperRef.current.scrollLeft / getCardWidth());
     setActiveIdx(Math.max(0, Math.min(idx, maxIdx)));
   };
 
@@ -576,15 +567,18 @@ function ProjectSlider({ onOpen }) {
       </div>
 
       <div
-        className="slider-track-wrapper"
-        ref={wrapperRef}
-        onScroll={handleScroll}
+        className="slider-viewport"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="slider-track">
-          {projects.map((p) => (
-            <ProjectCard key={p.id} project={p} onOpen={onOpen} />
+        <div
+          className="slider-track"
+          style={{ transform: `translateX(calc(50% - ${activeIdx * cardW}px - ${cardW / 2 - 12}px))` }}
+        >
+          {projects.map((p, i) => (
+            <div key={p.id} ref={i === 0 ? cardRef : null} className="slider-card-wrap">
+              <ProjectCard project={p} onOpen={onOpen} />
+            </div>
           ))}
         </div>
       </div>

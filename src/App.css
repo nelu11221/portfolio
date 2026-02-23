@@ -483,32 +483,22 @@ body {
   background: rgba(79,110,247,0.1);
 }
 
-.slider-track-wrapper {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  cursor: grab;
+.slider-viewport {
   width: 100%;
+  overflow: hidden;
+  position: relative;
 }
-
-.slider-track-wrapper::-webkit-scrollbar { display: none; }
-.slider-track-wrapper:active { cursor: grabbing; }
 
 .slider-track {
   display: flex;
   gap: 24px;
-  /* Use vw so padding is relative to viewport, not track content width */
-  padding-left:  calc((100vw - 320px) / 2);
-  padding-right: calc((100vw - 320px) / 2);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  /* no padding needed — transform handles centering */
 }
 
-@media (min-width: 769px) {
-  .slider-track {
-    padding-left:  60px;
-    padding-right: 60px;
-  }
+.slider-card-wrap {
+  flex: 0 0 auto;
 }
 
 /* ─── PROJECT CARD ─── */
