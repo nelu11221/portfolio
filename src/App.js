@@ -22,7 +22,7 @@ const projects = [
       { label: 'Mobile Sessions', value: '+91%' },
       { label: 'Page Load Time', value: '-1.4s' },
     ],
-    images: ['/images/project1.jpg', '/images/project1.jpg'],
+    images: ['/images/project1b.jpg', '/images/project1c.jpg', '/images/project1d.jpg', '/images/project1e.jpg'],
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const projects = [
       { label: 'Churn Reduction', value: '-28%' },
       { label: 'Delivery Time', value: '3 weeks' },
     ],
-    images: ['/images/project2.jpg', '/images/project2.jpg'],
+    images: ['/images/project2b.jpg', '/images/project2c.jpg', '/images/project2d.jpg', '/images/project2e.jpg'],
   },
   {
     id: 3,
@@ -64,7 +64,7 @@ const projects = [
       { label: 'Press Features', value: '3 publications' },
       { label: 'Awwwards', value: 'Honorable Mention' },
     ],
-    images: ['/images/project3.jpg', '/images/project3.jpg'],
+    images: ['/images/project3b.jpg', '/images/project3c.jpg', '/images/project3d.jpg', '/images/project3e.jpg'],
   },
   {
     id: 4,
@@ -85,7 +85,7 @@ const projects = [
       { label: 'Session Logging', value: '+83% faster' },
       { label: 'User Retention', value: '+41%' },
     ],
-    images: ['/images/project4.jpg', '/images/project4.jpg'],
+    images: ['/images/project4b.jpg', '/images/project4c.jpg', '/images/project4d.jpg', '/images/project4e.jpg'],
   },
   {
     id: 5,
@@ -106,7 +106,7 @@ const projects = [
       { label: 'Avg. Session', value: '4m 32s' },
       { label: 'Bounce Rate', value: '-38%' },
     ],
-    images: ['/images/project5.jpg', '/images/project5.jpg'],
+    images: ['/images/project5b.jpg', '/images/project5c.jpg', '/images/project5d.jpg', '/images/project5e.jpg'],
   },
   {
     id: 6,
@@ -127,7 +127,7 @@ const projects = [
       { label: 'Press Features', value: '2 magazines' },
       { label: 'Social Followers', value: '+3,200' },
     ],
-    images: ['/images/project6.jpg', '/images/project6.jpg'],
+    images: ['/images/project6b.jpg', '/images/project6c.jpg', '/images/project6d.jpg', '/images/project6e.jpg'],
   },
   {
     id: 7,
@@ -148,7 +148,7 @@ const projects = [
       { label: 'Social Engagement', value: '+210%' },
       { label: 'Pitch Win Rate', value: '+35%' },
     ],
-    images: ['/images/project7.jpg', '/images/project7.jpg'],
+    images: ['/images/project7b.jpg', '/images/project7c.jpg', '/images/project7d.jpg', '/images/project7e.jpg'],
   },
 ];
 
@@ -453,8 +453,17 @@ function CaseStudy({ project, onClose }) {
               </div>
             </div>
 
-            {/* Gallery image */}
-            <img src={project.images[1]} alt={project.title + ' detail'} className="cs-gallery-img" />
+            {/* Gallery — 4 images */}
+            <div className="cs-gallery-grid">
+              {project.images.map((img, i) => (
+                <img
+                  key={i}
+                  src={img}
+                  alt={`${project.title} — view ${i + 2}`}
+                  className="cs-gallery-grid-img"
+                />
+              ))}
+            </div>
 
             {/* CTA */}
             <div className="cs-cta">
