@@ -1049,7 +1049,16 @@ body {
   50% { transform: translateY(-8px); }
 }
 
-.float-icon { font-size: 1.2rem; }
+.float-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
 .float-title { font-size: 0.8rem; font-weight: 700; color: var(--white); }
 .float-sub { font-size: 0.68rem; color: var(--muted); }
 

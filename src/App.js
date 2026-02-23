@@ -467,14 +467,37 @@ function About() {
             <div className="avatar-ring ring-1" />
             <div className="avatar-ring ring-2" />
             <div className="avatar-float-card card-top">
-              <span className="float-icon">🚀</span>
+              <span className="float-icon">
+                {/* Rocket SVG */}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C12 2 7 6 7 13H17C17 6 12 2 12 2Z" fill="#4f6ef7" opacity="0.9"/>
+                  <path d="M9 13H15L13.5 20H10.5L9 13Z" fill="#4f6ef7"/>
+                  <path d="M7 13C7 13 4 14 4 17C4 17 6 17 7 16" fill="#00d4ff" opacity="0.8"/>
+                  <path d="M17 13C17 13 20 14 20 17C20 17 18 17 17 16" fill="#00d4ff" opacity="0.8"/>
+                  <circle cx="12" cy="9" r="2" fill="white" opacity="0.9"/>
+                </svg>
+              </span>
               <div>
                 <div className="float-title">48+ Projects</div>
                 <div className="float-sub">Delivered on time</div>
               </div>
             </div>
             <div className="avatar-float-card card-bottom">
-              <span className="float-icon">⭐</span>
+              <span className="float-icon">
+                {/* Star SVG */}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L14.9 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L9.1 8.26L12 2Z"
+                    fill="#f59e0b" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 2L14.9 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L9.1 8.26L12 2Z"
+                    fill="url(#starGrad)"/>
+                  <defs>
+                    <linearGradient id="starGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#fbbf24"/>
+                      <stop offset="100%" stopColor="#f59e0b"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
               <div>
                 <div className="float-title">5.0 Rating</div>
                 <div className="float-sub">48 reviews</div>
