@@ -119,6 +119,7 @@ body {
   cursor: none;
   transition: all 0.3s ease;
   letter-spacing: 0.02em;
+  text-decoration: none;
 }
 
 .nav-cta:hover {
