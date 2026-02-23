@@ -528,22 +528,28 @@ function ProjectCard({ project, onOpen }) {
 
 // ─── Slider Section ──────────────────────────────────────────────
 function ProjectSlider({ onOpen }) {
+  const trackRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const touchStart = useRef(0);
   const maxIdx = projects.length - 1;
-  const [cardW, setCardW] = useState(344);
-  const cardRef = useRef(null);
 
-  useEffect(() => {
-    const measure = () => {
-      if (cardRef.current) setCardW(cardRef.current.offsetWidth + 24);
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, []);
+  const getCardWidth = () => {
+    if (!trackRef.current) return 344;
+    const card = trackRef.current.querySelector('.project-card');
+    return card ? card.offsetWidth + 24 : 344;
+  };
 
   const goTo = (idx) => {
+    const clamped = Math.max(0, Math.min(idx, maxIdx));
+    setActiveIdx(clamped);
+    if (trackRef.current) {
+      trackRef.current.scrollTo({ left: clamped * getCardWidth(), behavior: 'smooth' });
+    }
+  };
+
+  const handleScroll = () => {
+    if (!trackRef.current) return;
+    const idx = Math.round(trackRef.current.scrollLeft / getCardWidth());
     setActiveIdx(Math.max(0, Math.min(idx, maxIdx)));
   };
 
@@ -555,42 +561,37 @@ function ProjectSlider({ onOpen }) {
 
   return (
     <section className="slider-section" id="portfolio">
-      <div className="slider-header">
-        <div>
-          <p className="section-label">Selected Work</p>
-          <h2 className="section-title">Projects that<br />made an impact</h2>
+      <div className="slider-inner">
+        <div className="slider-header">
+          <div>
+            <p className="section-label">Selected Work</p>
+            <h2 className="section-title">Projects that<br />made an impact</h2>
+          </div>
+          <div className="slider-controls">
+            <button className="slider-btn" onClick={() => goTo(activeIdx - 1)} disabled={activeIdx === 0}>←</button>
+            <button className="slider-btn" onClick={() => goTo(activeIdx + 1)} disabled={activeIdx === maxIdx}>→</button>
+          </div>
         </div>
-        <div className="slider-controls">
-          <button className="slider-btn" onClick={() => goTo(activeIdx - 1)} disabled={activeIdx === 0}>←</button>
-          <button className="slider-btn" onClick={() => goTo(activeIdx + 1)} disabled={activeIdx === maxIdx}>→</button>
-        </div>
-      </div>
 
-      <div
-        className="slider-viewport"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div
-          className="slider-track"
-          style={{ transform: `translateX(calc(50% - ${activeIdx * cardW}px - ${cardW / 2 - 12}px))` }}
-        >
-          {projects.map((p, i) => (
-            <div key={p.id} ref={i === 0 ? cardRef : null} className="slider-card-wrap">
-              <ProjectCard project={p} onOpen={onOpen} />
-            </div>
+        <div className="slider-track-fade">
+          <div
+            className="slider-track"
+            ref={trackRef}
+            onScroll={handleScroll}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            {projects.map((p) => (
+              <ProjectCard key={p.id} project={p} onOpen={onOpen} />
+            ))}
+          </div>
+        </div>
+
+        <div className="slider-dots">
+          {projects.map((_, i) => (
+            <button key={i} className={`dot${i === activeIdx ? ' active' : ''}`} onClick={() => goTo(i)} />
           ))}
         </div>
-      </div>
-
-      <div className="slider-dots">
-        {projects.map((_, i) => (
-          <button
-            key={i}
-            className={`dot${i === activeIdx ? ' active' : ''}`}
-            onClick={() => goTo(i)}
-          />
-        ))}
       </div>
     </section>
   );

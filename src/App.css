@@ -431,9 +431,30 @@ body {
   overflow: hidden;
 }
 
+.slider-inner {
+  max-width: 1084px;
+  margin: 0 auto;
+}
+
+.slider-track-fade {
+  position: relative;
+}
+
+.slider-track-fade::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--bg) 90%);
+  pointer-events: none;
+  z-index: 2;
+}
+
 .slider-header {
-  padding: 0 60px;
   margin-bottom: 48px;
+  padding: 0;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -483,23 +504,20 @@ body {
   background: rgba(79,110,247,0.1);
 }
 
-.slider-viewport {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
 .slider-track {
   display: flex;
   gap: 24px;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
-  /* no padding needed — transform handles centering */
+  padding: 0 60px 0 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
 }
 
-.slider-card-wrap {
-  flex: 0 0 auto;
-}
+.slider-track::-webkit-scrollbar { display: none; }
+.slider-track:active { cursor: grabbing; }
 
 /* ─── PROJECT CARD ─── */
 .project-card {
@@ -2298,7 +2316,7 @@ body {
   .hero-with-mockup { grid-template-columns: 1fr; }
   .navbar { padding: 16px 24px; }
   .hero { padding: 100px 24px 80px; }
-  .slider-header { padding: 0 24px; }
+
   .services-grid { grid-template-columns: 1fr 1fr; }
   .about-inner { grid-template-columns: 1fr; gap: 60px; }
   .process-layout { grid-template-columns: 1fr; gap: 48px; }
@@ -2342,8 +2360,10 @@ body {
 
   /* Slider */
   .slider-section { padding: 60px 0; }
-  .slider-header { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .slider-header { padding: 0; flex-direction: column; align-items: flex-start; gap: 16px; }
   .slider-controls { align-self: flex-start; margin-top: 4px; }
+  .slider-track { padding: 0 20px; }
+  .slider-btn { cursor: auto; }
   .card-title { font-size: 1rem; }
 
   /* About */
