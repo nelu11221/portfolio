@@ -996,16 +996,65 @@ function FAQ() {
   );
 }
 
+// ─── Contact SVG Icons ───────────────────────────────────────────
+const IconEmail = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="4" width="20" height="16" rx="3" stroke="#4f6ef7" strokeWidth="1.8"/>
+    <path d="M2 8l10 6 10-6" stroke="#4f6ef7" strokeWidth="1.8" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconLocation = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#4f6ef7" strokeWidth="1.8" fill="rgba(79,110,247,0.15)"/>
+    <circle cx="12" cy="9" r="2.5" stroke="#4f6ef7" strokeWidth="1.8"/>
+  </svg>
+);
+
+const IconClock = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="9" stroke="#4f6ef7" strokeWidth="1.8"/>
+    <path d="M12 7v5l3 3" stroke="#4f6ef7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const contactInfoItems = [
+  { icon: <IconEmail />, label: 'Email', value: 'hello@coding.studio' },
+  { icon: <IconLocation />, label: 'Location', value: 'Europe (Remote Worldwide)' },
+  { icon: <IconClock />, label: 'Response Time', value: 'Within 24 hours' },
+];
+
 // ─── Contact Section ──────────────────────────────────────────────
+// EmailJS config — replace with your real IDs from emailjs.com
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+
 function Contact() {
   const [form, setForm] = useState({ name: '', email: '', budget: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSent(true);
+    setStatus('sending');
+
+    window.emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        from_name:  form.name,
+        from_email: form.email,
+        budget:     form.budget,
+        message:    form.message,
+      },
+      EMAILJS_PUBLIC_KEY
+    ).then(() => {
+      setStatus('success');
+    }).catch(() => {
+      setStatus('error');
+    });
   };
 
   return (
@@ -1024,11 +1073,7 @@ function Contact() {
           </p>
 
           <div className="contact-info-list">
-            {[
-              { icon: '📧', label: 'Email', value: 'hello@coding.studio' },
-              { icon: '📍', label: 'Location', value: 'Europe (Remote Worldwide)' },
-              { icon: '⏱️', label: 'Response Time', value: 'Within 24 hours' },
-            ].map(item => (
+            {contactInfoItems.map(item => (
               <div className="contact-info-item" key={item.label}>
                 <div className="contact-info-icon">{item.icon}</div>
                 <div>
@@ -1048,12 +1093,17 @@ function Contact() {
 
         {/* Right form */}
         <div className="contact-right">
-          {sent ? (
+          {status === 'success' ? (
             <div className="contact-success">
-              <div className="success-icon">✅</div>
+              <div className="success-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="rgba(16,185,129,0.15)" stroke="#10b981" strokeWidth="1.5"/>
+                  <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               <h3 className="success-title">Message sent!</h3>
               <p className="success-desc">Thanks for reaching out. I will get back to you within 24 hours.</p>
-              <button className="btn-primary" style={{ marginTop: '24px' }} onClick={() => setSent(false)}>
+              <button className="btn-primary" style={{ marginTop: '24px' }} onClick={() => { setStatus('idle'); setForm({ name: '', email: '', budget: '', message: '' }); }}>
                 <span>Send another</span>
               </button>
             </div>
@@ -1062,38 +1112,17 @@ function Contact() {
               <div className="form-row">
                 <div className="form-group">
                   <label className="form-label">Your Name</label>
-                  <input
-                    className="form-input"
-                    type="text"
-                    name="name"
-                    placeholder="John Doe"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                  />
+                  <input className="form-input" type="text" name="name" placeholder="John Doe" value={form.name} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Email Address</label>
-                  <input
-                    className="form-input"
-                    type="email"
-                    name="email"
-                    placeholder="john@company.com"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                  />
+                  <input className="form-input" type="email" name="email" placeholder="john@company.com" value={form.email} onChange={handleChange} required />
                 </div>
               </div>
 
               <div className="form-group">
                 <label className="form-label">Budget Range</label>
-                <select
-                  className="form-input form-select"
-                  name="budget"
-                  value={form.budget}
-                  onChange={handleChange}
-                >
+                <select className="form-input form-select" name="budget" value={form.budget} onChange={handleChange}>
                   <option value="">Select a budget range</option>
                   <option>Under €1,000</option>
                   <option>€1,000 – €3,000</option>
@@ -1105,19 +1134,16 @@ function Contact() {
 
               <div className="form-group">
                 <label className="form-label">Tell me about your project</label>
-                <textarea
-                  className="form-input form-textarea"
-                  name="message"
-                  placeholder="What are you building? What's the goal? Any deadline?"
-                  value={form.message}
-                  onChange={handleChange}
-                  required
-                />
+                <textarea className="form-input form-textarea" name="message" placeholder="What are you building? What's the goal? Any deadline?" value={form.message} onChange={handleChange} required />
               </div>
 
-              <button type="submit" className="btn-primary form-submit">
-                <span>Send Message</span>
-                <span>→</span>
+              {status === 'error' && (
+                <p className="form-error">Something went wrong. Please try again or email me directly.</p>
+              )}
+
+              <button type="submit" className="btn-primary form-submit" disabled={status === 'sending'}>
+                <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
+                {status !== 'sending' && <span>→</span>}
               </button>
 
               <p className="form-note">No spam, no unsolicited follow-ups. Just a real reply.</p>
