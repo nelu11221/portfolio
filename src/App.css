@@ -2233,9 +2233,11 @@ body {
 /* ─── CASE STUDY PAGE ─── */
 .cs-page {
   min-height: 100vh;
+  height: 100%;
   background: var(--bg);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 /* Sticky top bar */
@@ -2279,7 +2281,6 @@ body {
 /* Scrollable body */
 .cs-content {
   flex: 1;
-  overflow-y: auto;
 }
 
 /* Hero */
