@@ -1,0 +1,1175 @@
+import React, { useEffect, useRef, useState } from 'react';
+import './App.css';
+
+// ─── Project Data ───────────────────────────────────────────────
+const projects = [
+  {
+    id: 1,
+    image: '/images/project1.jpg',
+    tags: ['UI/UX Design', 'React'],
+    title: 'ShopFlow – E-commerce Redesign',
+    desc: 'Full redesign of a fashion e-commerce platform, boosting conversion rate by 38%.',
+    year: '2024',
+  },
+  {
+    id: 2,
+    image: '/images/project2.jpg',
+    tags: ['Dashboard', 'Next.js'],
+    title: 'Nexus Analytics Dashboard',
+    desc: 'Real-time data visualization platform for SaaS teams with dark-mode-first design.',
+    year: '2024',
+  },
+  {
+    id: 3,
+    image: '/images/project3.jpg',
+    tags: ['Branding', 'Motion'],
+    title: 'Lumina Brand Identity',
+    desc: 'Complete visual identity system for a creative studio — logo, type, motion guidelines.',
+    year: '2023',
+  },
+  {
+    id: 4,
+    image: '/images/project4.jpg',
+    tags: ['Mobile', 'UI Design'],
+    title: 'FitTrack Mobile App',
+    desc: 'Fitness tracking app UI designed for clarity under pressure — built for serious athletes.',
+    year: '2023',
+  },
+  {
+    id: 5,
+    image: '/images/project5.jpg',
+    tags: ['Web Dev', 'GSAP'],
+    title: 'Vertex Agency Website',
+    desc: 'Immersive agency portfolio with WebGL backgrounds and scroll-driven storytelling.',
+    year: '2023',
+  },
+  {
+    id: 6,
+    image: '/images/project6.jpg',
+    tags: ['Branding', 'Identity'],
+    title: 'Dimora del Tramonto',
+    desc: 'Full brand identity for a luxury hospitality venue — logo, typography, print collateral, and visual guidelines.',
+    year: '2024',
+  },
+  {
+    id: 7,
+    image: '/images/project7.jpg',
+    tags: ['Branding', 'Motion'],
+    title: 'Artmedia Branding',
+    desc: 'Creative brand system for a media production company — bold visuals, motion identity, and digital assets.',
+    year: '2024',
+  },
+];
+
+// ─── Custom Cursor ───────────────────────────────────────────────
+function CustomCursor() {
+  const cursorRef = useRef(null);
+  const followerRef = useRef(null);
+
+  useEffect(() => {
+    const onMove = (e) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.left = e.clientX + 'px';
+        cursorRef.current.style.top = e.clientY + 'px';
+      }
+      if (followerRef.current) {
+        followerRef.current.style.left = e.clientX + 'px';
+        followerRef.current.style.top = e.clientY + 'px';
+      }
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+
+  return (
+    <>
+      <div className="cursor" ref={cursorRef} />
+      <div className="cursor-follower" ref={followerRef} />
+    </>
+  );
+}
+
+// ─── Navbar ─────────────────────────────────────────────────────
+function Navbar() {
+  return (
+    <nav className="navbar">
+      <div className="nav-logo">
+        Cod<span>][</span>ng
+      </div>
+      <ul className="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button className="nav-cta">Start a Project</button>
+    </nav>
+  );
+}
+
+// ─── Hero Section ────────────────────────────────────────────────
+// ─── Tech Stack Icons ────────────────────────────────────────────
+// ─── Browser Mockup ──────────────────────────────────────────────
+function BrowserMockup() {
+  const [activeLine, setActiveLine] = useState(0);
+
+  const codeLines = [
+    { indent: 0, tokens: [{ t: 'keyword', v: 'const ' }, { t: 'fn', v: 'Hero' }, { t: 'plain', v: ' = () => (' }] },
+    { indent: 1, tokens: [{ t: 'tag', v: '<section ' }, { t: 'attr', v: 'className', }, { t: 'plain', v: '=' }, { t: 'str', v: '"hero"' }, { t: 'tag', v: '>' }] },
+    { indent: 2, tokens: [{ t: 'tag', v: '<h1 ' }, { t: 'attr', v: 'className' }, { t: 'plain', v: '=' }, { t: 'str', v: '"hero-title"' }, { t: 'tag', v: '>' }] },
+    { indent: 3, tokens: [{ t: 'plain', v: 'Design that ' }, { t: 'accent', v: 'converts.' }] },
+    { indent: 2, tokens: [{ t: 'tag', v: '</h1>' }] },
+    { indent: 2, tokens: [{ t: 'tag', v: '<p>' }, { t: 'plain', v: 'Code that ' }, { t: 'accent', v: 'scales.' }, { t: 'tag', v: '</p>' }] },
+    { indent: 2, tokens: [{ t: 'tag', v: '<button ' }, { t: 'attr', v: 'className' }, { t: 'plain', v: '=' }, { t: 'str', v: '"btn-primary"' }, { t: 'tag', v: '>' }] },
+    { indent: 3, tokens: [{ t: 'plain', v: 'Start a Project →' }] },
+    { indent: 2, tokens: [{ t: 'tag', v: '</button>' }] },
+    { indent: 1, tokens: [{ t: 'tag', v: '</section>' }] },
+    { indent: 0, tokens: [{ t: 'plain', v: ');' }] },
+  ];
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setActiveLine(l => (l + 1) % codeLines.length);
+    }, 900);
+    return () => clearInterval(t);
+  }, []);
+
+  const tokenClass = (t) => {
+    const map = { keyword: 'tok-keyword', fn: 'tok-fn', tag: 'tok-tag', attr: 'tok-attr', str: 'tok-str', plain: 'tok-plain', accent: 'tok-accent' };
+    return map[t] || 'tok-plain';
+  };
+
+  return (
+    <div className="mockup-wrap">
+      {/* Glow rings behind mockup */}
+      <div className="mockup-glow-ring ring-a" />
+      <div className="mockup-glow-ring ring-b" />
+
+      <div className="mockup-browser">
+        {/* Browser chrome */}
+        <div className="mockup-bar">
+          <div className="mockup-dots">
+            <span className="mdot mdot-red" />
+            <span className="mdot mdot-yellow" />
+            <span className="mdot mdot-green" />
+          </div>
+          <div className="mockup-url">
+            <span className="url-lock">🔒</span>
+            <span>coding.studio</span>
+          </div>
+          <div className="mockup-bar-actions">
+            <span className="mbar-icon">↻</span>
+          </div>
+        </div>
+
+        {/* Code editor body */}
+        <div className="mockup-body">
+          {/* Line numbers */}
+          <div className="mockup-line-nums">
+            {codeLines.map((_, i) => (
+              <span key={i} className={`line-num${activeLine === i ? ' line-num-active' : ''}`}>{i + 1}</span>
+            ))}
+          </div>
+
+          {/* Code */}
+          <div className="mockup-code">
+            {codeLines.map((line, i) => (
+              <div key={i} className={`code-line${activeLine === i ? ' code-line-active' : ''}`}>
+                <span style={{ display: 'inline-block', width: line.indent * 16 }} />
+                {line.tokens.map((tok, j) => (
+                  <span key={j} className={tokenClass(tok.t)}>{tok.v}</span>
+                ))}
+                {activeLine === i && <span className="code-cursor" />}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom status bar */}
+        <div className="mockup-status">
+          <span className="status-dot" />
+          <span>React 18 · JSX · Sora Font</span>
+          <span className="status-right">Ln {activeLine + 1}, Col 1</span>
+        </div>
+      </div>
+
+      {/* Floating badges around mockup */}
+      <div className="mockup-badge badge-tl">
+        <img src="/images/react.svg" alt="React" className="badge-icon" />
+        React
+      </div>
+      <div className="mockup-badge badge-tr">
+        <img src="/images/figma.svg" alt="Figma" className="badge-icon" />
+        Figma
+      </div>
+      <div className="mockup-badge badge-bl">
+        <img src="/images/nextjs.svg" alt="Next.js" className="badge-icon" />
+        Next.js
+      </div>
+      <div className="mockup-badge badge-br">
+        <img src="/images/tailwind.svg" alt="Tailwind" className="badge-icon" />
+        Tailwind
+      </div>
+    </div>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="hero hero-with-mockup" id="home">
+      {/* Background blobs */}
+      <div className="hero-blob blob-1" />
+      <div className="hero-blob blob-2" />
+      <div className="hero-blob blob-3" />
+
+      <div className="hero-content">
+        <div className="hero-badge">
+          <span className="badge-dot" />
+          Available for projects · 2025
+        </div>
+
+        <h1 className="hero-title">
+          <span className="line">Design that</span>
+          <span className="line"><span className="accent-word">converts.</span></span>
+          <span className="line"><span className="outline-word">Code</span> that scales.</span>
+        </h1>
+
+        <p className="hero-subtitle">
+          I'm a UI/UX designer & developer crafting digital experiences
+          that don't just look good — they perform. Let's build something
+          that makes people stop scrolling.
+        </p>
+
+        <div className="hero-actions">
+          <a href="#portfolio" className="btn-primary">
+            <span>View My Work</span>
+            <span>→</span>
+          </a>
+          <a href="#contact" className="btn-secondary">
+            Get a Quote ↗
+          </a>
+        </div>
+      </div>
+
+      {/* Browser Mockup */}
+      <BrowserMockup />
+
+      {/* Stats panel */}
+      <div className="hero-stats">
+        <div className="stat-card">
+          <div className="stat-number">48+</div>
+          <div className="stat-label">Projects Done</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-number">5yr</div>
+          <div className="stat-label">Experience</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-number">100%</div>
+          <div className="stat-label">Client Satisfaction</div>
+        </div>
+      </div>
+
+      <div className="scroll-indicator">
+        <div className="scroll-line" />
+        <span className="scroll-text">Scroll to explore</span>
+      </div>
+    </section>
+  );
+}
+
+// ─── Project Card ────────────────────────────────────────────────
+function ProjectCard({ project }) {
+  return (
+    <div className="project-card">
+      <div className="card-image">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="card-img"
+        />
+      </div>
+      <div className="card-body">
+        <div className="card-tags">
+          {project.tags.map((t) => (
+            <span className="tag" key={t}>{t}</span>
+          ))}
+        </div>
+        <h3 className="card-title">{project.title}</h3>
+        <p className="card-desc">{project.desc}</p>
+      </div>
+      <div className="card-footer">
+        <span className="card-year">{project.year}</span>
+        <div className="card-arrow">↗</div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Slider Section ──────────────────────────────────────────────
+function ProjectSlider() {
+  const trackRef = useRef(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const cardWidth = 380 + 24; // card + gap
+  const maxIdx = projects.length - 1;
+
+  // Drag state
+  const drag = useRef({ startX: 0, scrollLeft: 0, isDown: false });
+
+  const goTo = (idx) => {
+    const clamped = Math.max(0, Math.min(idx, maxIdx));
+    setActiveIdx(clamped);
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translateX(-${clamped * cardWidth}px)`;
+    }
+  };
+
+  // Mouse drag
+  const handleMouseDown = (e) => {
+    drag.current.isDown = true;
+    drag.current.startX = e.pageX;
+    drag.current.currentIdx = activeIdx;
+  };
+
+  const handleMouseUp = (e) => {
+    if (!drag.current.isDown) return;
+    drag.current.isDown = false;
+    const diff = drag.current.startX - e.pageX;
+    if (Math.abs(diff) > 60) {
+      goTo(activeIdx + (diff > 0 ? 1 : -1));
+    }
+  };
+
+  // Touch
+  const handleTouchStart = (e) => {
+    drag.current.startX = e.touches[0].pageX;
+  };
+
+  const handleTouchEnd = (e) => {
+    const diff = drag.current.startX - e.changedTouches[0].pageX;
+    if (Math.abs(diff) > 50) goTo(activeIdx + (diff > 0 ? 1 : -1));
+  };
+
+  return (
+    <section className="slider-section" id="portfolio">
+      <div className="slider-header">
+        <div>
+          <p className="section-label">Selected Work</p>
+          <h2 className="section-title">Projects that<br />made an impact</h2>
+        </div>
+        <div className="slider-controls">
+          <button className="slider-btn" onClick={() => goTo(activeIdx - 1)}>←</button>
+          <button className="slider-btn" onClick={() => goTo(activeIdx + 1)}>→</button>
+        </div>
+      </div>
+
+      <div
+        className="slider-track-wrapper"
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className="slider-track" ref={trackRef}>
+          {projects.map((p) => (
+            <ProjectCard key={p.id} project={p} />
+          ))}
+        </div>
+      </div>
+
+      <div className="slider-dots">
+        {projects.map((_, i) => (
+          <button
+            key={i}
+            className={`dot${i === activeIdx ? ' active' : ''}`}
+            onClick={() => goTo(i)}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── About Section ───────────────────────────────────────────────
+const skills = [
+  { label: 'UI/UX Design', pct: 95 },
+  { label: 'React / Next.js', pct: 90 },
+  { label: 'Graphic Design', pct: 85 },
+  { label: 'Website Development', pct: 88 },
+];
+
+const tools = ['Figma', 'React', 'Next.js', 'GSAP', 'Illustrator'];
+
+function SkillBar({ label, pct }) {
+  const barRef = useRef(null);
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        el.style.width = pct + '%';
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [pct]);
+
+  return (
+    <div className="skill-item">
+      <div className="skill-meta">
+        <span className="skill-label">{label}</span>
+        <span className="skill-pct">{pct}%</span>
+      </div>
+      <div className="skill-track">
+        <div className="skill-fill" ref={barRef} style={{ width: '0%' }} />
+      </div>
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <section className="about-section" id="about">
+      <div className="about-inner">
+        {/* Left col */}
+        <div className="about-left">
+          <p className="section-label">Who I Am</p>
+          <h2 className="section-title">Turning ideas into<br /><span className="accent-word">digital reality</span></h2>
+          <p className="about-text">
+            Hey — I'm a designer & developer based in Europe with 5+ years of experience
+            building products that blend clean aesthetics with rock-solid engineering.
+            I obsess over every pixel, every interaction, every millisecond of load time.
+          </p>
+          <p className="about-text">
+            From early-stage startups to established brands, I've helped clients launch
+            platforms that users actually love using. My stack lives at the intersection
+            of design thinking and modern frontend development.
+          </p>
+          <div className="about-tools">
+            {tools.map(t => (
+              <span className="tool-badge" key={t}>{t}</span>
+            ))}
+          </div>
+          <a href="#contact" className="btn-primary" style={{ marginTop: '36px', display: 'inline-flex' }}>
+            <span>Let's Work Together</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        {/* Right col */}
+        <div className="about-right">
+          <div className="about-avatar-wrap">
+            <div className="about-avatar">
+              <img src="/images/profile.jpg" alt="Profile" className="about-avatar-img" />
+            </div>
+            <div className="avatar-ring ring-1" />
+            <div className="avatar-ring ring-2" />
+            <div className="avatar-float-card card-top">
+              <span className="float-icon">🚀</span>
+              <div>
+                <div className="float-title">48+ Projects</div>
+                <div className="float-sub">Delivered on time</div>
+              </div>
+            </div>
+            <div className="avatar-float-card card-bottom">
+              <span className="float-icon">⭐</span>
+              <div>
+                <div className="float-title">5.0 Rating</div>
+                <div className="float-sub">48 reviews</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="skills-list">
+            {skills.map(s => <SkillBar key={s.label} {...s} />)}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Services Section ────────────────────────────────────────────
+const services = [
+  {
+    icon: '/images/figma.svg',
+    title: 'UI/UX Design',
+    desc: 'User-centered interfaces built on real research. From wireframes to polished, pixel-perfect Figma files ready for dev handoff.',
+    features: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems'],
+    accent: '#4f6ef7',
+  },
+  {
+    icon: '/images/react.svg',
+    title: 'Website Development',
+    desc: 'Fast, accessible, SEO-ready websites built with React or Next.js. Every build is optimized for performance and scalability.',
+    features: ['React / Next.js', 'Responsive Design', 'Performance', 'SEO Ready'],
+    accent: '#00d4ff',
+    featured: true,
+  },
+  {
+    icon: '/images/illustrator.svg',
+    title: 'Graphic Design',
+    desc: 'Brand identities, print, social, and everything in between. Visual storytelling that makes your brand instantly recognizable.',
+    features: ['Brand Identity', 'Logo Design', 'Social Media', 'Print Design'],
+    accent: '#7c3aed',
+  },
+];
+
+function ServiceCard({ service }) {
+  return (
+    <div className={`service-card${service.featured ? ' service-featured' : ''}`}>
+      {service.featured && <div className="service-badge">Most Popular</div>}
+      <div className="service-icon" style={{ background: `${service.accent}18` }}>
+        <img src={service.icon} alt={service.title} className="service-icon-img" />
+      </div>
+      <h3 className="service-title">{service.title}</h3>
+      <p className="service-desc">{service.desc}</p>
+      <ul className="service-features">
+        {service.features.map(f => (
+          <li key={f}>
+            <span className="feature-check" style={{ color: service.accent }}>✓</span>
+            {f}
+          </li>
+        ))}
+      </ul>
+      <a href="#contact" className="service-cta" style={{ '--sc': service.accent }}>
+        Start a Project →
+      </a>
+    </div>
+  );
+}
+
+function Services() {
+  return (
+    <section className="services-section" id="services">
+      <div className="section-header-center">
+        <p className="section-label">What I Offer</p>
+        <h2 className="section-title">Services built for<br /><span className="accent-word">real results</span></h2>
+        <p className="section-subtitle">
+          Every service is designed to deliver measurable impact — not just beautiful deliverables.
+        </p>
+      </div>
+      <div className="services-grid">
+        {services.map(s => <ServiceCard key={s.title} service={s} />)}
+      </div>
+    </section>
+  );
+}
+
+// ─── Process Section (REDESIGNED) ───────────────────────────────
+const steps = [
+  {
+    num: '01',
+    title: 'Discovery',
+    tagline: 'We align before we act.',
+    desc: 'A focused kickoff where I learn everything about your business, goals, and audience. We map out the project scope, define KPIs, and agree on a timeline — so there are zero surprises down the road.',
+    deliverables: ['Project Brief', 'Competitor Analysis', 'Sitemap / Scope Doc', 'Timeline & Milestones'],
+    duration: '1–2 days',
+    color: '#4f6ef7',
+  },
+  {
+    num: '02',
+    title: 'Design',
+    tagline: 'From blank canvas to pixel-perfect.',
+    desc: 'Starting from rough wireframes and evolving into high-fidelity, interactive Figma prototypes. You review and give feedback at every stage — nothing goes to dev without your sign-off.',
+    deliverables: ['Wireframes', 'Moodboard & Style Tile', 'Hi-Fi Mockups', 'Interactive Prototype'],
+    duration: '3–7 days',
+    color: '#00d4ff',
+  },
+  {
+    num: '03',
+    title: 'Development',
+    tagline: 'Code that performs as good as it looks.',
+    desc: 'I build using React or Next.js with clean, maintainable code. Fully responsive from mobile up, accessible by default, and performance-optimized — Lighthouse scores matter here.',
+    deliverables: ['React / Next.js Build', 'Mobile Responsive', 'CMS Integration', 'Performance Audit'],
+    duration: '5–14 days',
+    color: '#7c3aed',
+  },
+  {
+    num: '04',
+    title: 'Launch',
+    tagline: 'Go live with confidence.',
+    desc: "Final QA across browsers and devices, domain setup, hosting, analytics tracking — then we launch. You get 30 days of post-launch support included, because bugs don't wait for business hours.",
+    deliverables: ['Cross-browser QA', 'Domain & Hosting', 'Analytics Setup', '30-day Support'],
+    duration: '1–2 days',
+    color: '#f59e0b',
+  },
+];
+
+function Process() {
+  const [activeStep, setActiveStep] = useState(0);
+  const current = steps[activeStep];
+
+  return (
+    <section className="process-section" id="process">
+      <div className="process-bg-num">{current.num}</div>
+
+      <div className="process-layout">
+        <div className="process-left">
+          <p className="section-label">How I Work</p>
+          <h2 className="section-title" style={{ marginBottom: '48px' }}>
+            The blueprint<br />behind every<br /><span className="accent-word">great project</span>
+          </h2>
+
+          <div className="process-accordion">
+            {steps.map((step, i) => (
+              <div
+                key={step.num}
+                className={`accordion-item${activeStep === i ? ' accordion-active' : ''}`}
+                onClick={() => setActiveStep(i)}
+              >
+                <div className="accordion-header">
+                  <span className="accordion-num" style={{ color: activeStep === i ? step.color : 'var(--muted)' }}>
+                    {step.num}
+                  </span>
+                  <span className="accordion-title">{step.title}</span>
+                  <span className="accordion-arrow" style={{ color: activeStep === i ? step.color : 'var(--muted)' }}>
+                    {activeStep === i ? '−' : '+'}
+                  </span>
+                </div>
+                {activeStep === i && (
+                  <div className="accordion-body">
+                    <p className="accordion-tagline" style={{ color: step.color }}>{step.tagline}</p>
+                    <p className="accordion-desc">{step.desc}</p>
+                  </div>
+                )}
+                {activeStep === i && (
+                  <div className="accordion-bar" style={{ background: step.color }} />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="process-right">
+          <div className="process-detail-card">
+            <div className="detail-header">
+              <div className="detail-pill" style={{ background: `${current.color}20`, color: current.color, border: `1px solid ${current.color}40` }}>
+                Phase {current.num}
+              </div>
+              <div className="detail-duration">
+                <span className="duration-dot" style={{ background: current.color }} />
+                {current.duration}
+              </div>
+            </div>
+
+            <h3 className="detail-title">{current.title}</h3>
+            <p className="detail-tagline" style={{ color: current.color }}>{current.tagline}</p>
+            <p className="detail-desc">{current.desc}</p>
+
+            <div className="detail-divider" />
+
+            <p className="detail-deliverables-label">Deliverables</p>
+            <div className="detail-deliverables">
+              {current.deliverables.map((d) => (
+                <div className="deliverable-item" key={d}>
+                  <span className="deliverable-check" style={{ color: current.color }}>✓</span>
+                  {d}
+                </div>
+              ))}
+            </div>
+
+            <div className="detail-progress">
+              <div className="progress-label">
+                <span>Overall Progress</span>
+                <span style={{ color: current.color }}>{activeStep + 1} / {steps.length}</span>
+              </div>
+              <div className="progress-track">
+                <div
+                  className="progress-fill"
+                  style={{
+                    width: `${((activeStep + 1) / steps.length) * 100}%`,
+                    background: `linear-gradient(90deg, ${current.color}, ${current.color}80)`,
+                    transition: 'width 0.6s cubic-bezier(0.25,0.46,0.45,0.94)',
+                  }}
+                />
+              </div>
+            </div>
+
+            {activeStep < steps.length - 1 && (
+              <button
+                className="detail-next-btn"
+                style={{ borderColor: `${current.color}50`, color: current.color }}
+                onClick={() => setActiveStep(activeStep + 1)}
+              >
+                Next: {steps[activeStep + 1].title} →
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Testimonials Section ────────────────────────────────────────
+const testimonials = [
+  {
+    id: 1,
+    name: 'Sarah Mitchell',
+    role: 'CEO',
+    company: 'Luminary Studio',
+    avatar: '👩‍💼',
+    avatarBg: 'linear-gradient(135deg, #1a1a2e, #16213e)',
+    rating: 5,
+    text: 'Working with this team was a game-changer. They completely transformed our brand identity and the new website has tripled our inbound leads in just two months. The attention to detail is on another level.',
+    project: 'Brand Identity + Website',
+    result: '+214% leads',
+    resultColor: '#4f6ef7',
+  },
+  {
+    id: 2,
+    name: 'James Okafor',
+    role: 'Product Manager',
+    company: 'Nexus Labs',
+    avatar: '👨‍💻',
+    avatarBg: 'linear-gradient(135deg, #0d1117, #1f2d3d)',
+    rating: 5,
+    text: "Delivered a complex SaaS dashboard in under 3 weeks on budget, pixel-perfect, and with animations that genuinely impressed our investors. I have worked with many devs and none come close.",
+    project: 'SaaS Dashboard UI',
+    result: 'On time & budget',
+    resultColor: '#00d4ff',
+  },
+  {
+    id: 3,
+    name: 'Elena Rousseau',
+    role: 'Founder',
+    company: 'FitTrack App',
+    avatar: '👩‍🎨',
+    avatarBg: 'linear-gradient(135deg, #1a0533, #3d1f6b)',
+    rating: 5,
+    text: "The mobile UI they designed for us has a 4.9 star rating on the App Store. Users specifically mention how intuitive it feels. That does not happen by accident — it is the result of real craft and user empathy.",
+    project: 'Mobile App UI/UX',
+    result: '4.9 App Store',
+    resultColor: '#7c3aed',
+  },
+  {
+    id: 4,
+    name: 'Marco Delgado',
+    role: 'Marketing Director',
+    company: 'Vertex Agency',
+    avatar: '🧑‍🚀',
+    avatarBg: 'linear-gradient(135deg, #1a1205, #2d2010)',
+    rating: 5,
+    text: "Our agency site went from embarrassing to award-worthy. We submitted to Awwwards two weeks after launch and got Honorable Mention. Clients now come to us citing the website specifically.",
+    project: 'Agency Website',
+    result: 'Awwwards HM',
+    resultColor: '#f59e0b',
+  },
+  {
+    id: 5,
+    name: 'Priya Nair',
+    role: 'Head of Design',
+    company: 'ShopFlow',
+    avatar: '👩‍🔬',
+    avatarBg: 'linear-gradient(135deg, #0a1628, #0f3d2e)',
+    rating: 5,
+    text: 'The e-commerce redesign increased our conversion rate by 38% in the first month. The checkout flow is so smooth that cart abandonment dropped by half. ROI on this project was immediate.',
+    project: 'E-commerce Redesign',
+    result: '+38% conversion',
+    resultColor: '#10b981',
+  },
+];
+
+function StarRating({ count }) {
+  return (
+    <div className="star-rating">
+      {Array.from({ length: count }).map((_, i) => (
+        <span key={i} className="star">★</span>
+      ))}
+    </div>
+  );
+}
+
+function TestimonialCard({ testimonial, isActive }) {
+  return (
+    <div className={`testi-card${isActive ? ' testi-active' : ''}`}>
+      <div className="testi-quote-mark">"</div>
+      <StarRating count={testimonial.rating} />
+      <p className="testi-text">{testimonial.text}</p>
+      <div
+        className="testi-result-badge"
+        style={{
+          background: `${testimonial.resultColor}15`,
+          color: testimonial.resultColor,
+          borderColor: `${testimonial.resultColor}30`,
+        }}
+      >
+        <span className="testi-result-dot" style={{ background: testimonial.resultColor }} />
+        {testimonial.result}
+      </div>
+      <div className="testi-footer">
+        <div className="testi-avatar" style={{ background: testimonial.avatarBg }}>
+          {testimonial.avatar}
+        </div>
+        <div className="testi-author">
+          <div className="testi-name">{testimonial.name}</div>
+          <div className="testi-meta">{testimonial.role} · {testimonial.company}</div>
+        </div>
+        <div className="testi-project-tag">{testimonial.project}</div>
+      </div>
+    </div>
+  );
+}
+
+function Testimonials() {
+  const [active, setActive] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  const goTo = (idx) => {
+    if (animating) return;
+    setAnimating(true);
+    setTimeout(() => {
+      setActive(idx);
+      setAnimating(false);
+    }, 220);
+  };
+
+  const prev = () => goTo((active - 1 + testimonials.length) % testimonials.length);
+  const next = () => goTo((active + 1) % testimonials.length);
+
+
+  const visible = [
+    (active - 1 + testimonials.length) % testimonials.length,
+    active,
+    (active + 1) % testimonials.length,
+  ];
+
+  return (
+    <section className="testi-section" id="testimonials">
+      <div className="testi-bg-glow" />
+
+      <div className="section-header-center">
+        <p className="section-label">Social Proof</p>
+        <h2 className="section-title">
+          Don't take my<br />word for it —<br /><span className="accent-word">theirs.</span>
+        </h2>
+        <p className="section-subtitle">
+          Real results from real clients. Every number is verified, every quote is genuine.
+        </p>
+      </div>
+
+      <div className="testi-stats-row">
+        {[
+          { num: '48+', label: 'Happy Clients' },
+          { num: '5.0', label: 'Average Rating' },
+          { num: '100%', label: 'On-time Delivery' },
+          { num: '+38%', label: 'Avg. Conversion Lift' },
+        ].map(s => (
+          <div className="testi-stat" key={s.label}>
+            <div className="testi-stat-num">{s.num}</div>
+            <div className="testi-stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="testi-stage">
+        <button className="testi-nav-btn" onClick={prev}>←</button>
+
+        <div className={`testi-cards-wrap${animating ? ' testi-fade' : ''}`}>
+          {visible.map((idx, pos) => (
+            <div
+              key={idx}
+              className={`testi-slot testi-slot-${pos}`}
+              onClick={() => pos !== 1 && goTo(idx)}
+            >
+              <TestimonialCard testimonial={testimonials[idx]} isActive={pos === 1} />
+            </div>
+          ))}
+        </div>
+
+        <button className="testi-nav-btn" onClick={next}>→</button>
+      </div>
+
+      <div className="slider-dots" style={{ marginTop: '40px' }}>
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            className={`dot${i === active ? ' active' : ''}`}
+            onClick={() => goTo(i)}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── App ─────────────────────────────────────────────────────────
+// ─── FAQ Section ─────────────────────────────────────────────────
+const faqs = [
+  {
+    q: 'How long does a typical project take?',
+    a: 'It depends on scope — a landing page can be done in 5–7 days, while a full product design + dev build typically takes 3–6 weeks. I give you a precise timeline after our discovery call, and I stick to it.',
+  },
+  {
+    q: 'Do you work with clients outside of Europe?',
+    a: 'Absolutely. I work async-first with clients across North America, the Middle East, and Southeast Asia. Time zones have never been a blocker — clear communication and good tooling make it seamless.',
+  },
+  {
+    q: 'What do you need from me to get started?',
+    a: 'A brief (or even just a rough idea), your brand assets if you have them, and a 30-minute kickoff call. I handle the rest — research, structure, design, and code.',
+  },
+  {
+    q: 'Do you offer ongoing support after launch?',
+    a: 'Yes. Every project includes 30 days of post-launch support at no extra cost. After that, I offer monthly retainer packages for clients who need continuous updates, new features, or A/B testing.',
+  },
+  {
+    q: 'Can you redesign an existing website without breaking it?',
+    a: 'That is one of my specialties. I audit your current site first — performance, UX, conversion gaps — then redesign and rebuild iteratively so the transition is smooth and your SEO is protected.',
+  },
+  {
+    q: 'What is your pricing like?',
+    a: 'Projects are quoted fixed-price based on scope, so you always know the total upfront — no surprise invoices. Landing pages start around €800, full websites from €2,500. Book a call and I will send a detailed quote within 24 hours.',
+  },
+];
+
+function FAQItem({ faq, index }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`faq-item${open ? ' faq-open' : ''}`} onClick={() => setOpen(!open)}>
+      <div className="faq-header">
+        <span className="faq-num">0{index + 1}</span>
+        <span className="faq-question">{faq.q}</span>
+        <span className="faq-icon">{open ? '−' : '+'}</span>
+      </div>
+      {open && (
+        <div className="faq-body">
+          <p className="faq-answer">{faq.a}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FAQ() {
+  return (
+    <section className="faq-section" id="faq">
+      <div className="faq-inner">
+        <div className="faq-left">
+          <p className="section-label">Got Questions?</p>
+          <h2 className="section-title">
+            Everything you<br />need to know<br /><span className="accent-word">before we start.</span>
+          </h2>
+          <p className="about-text" style={{ marginTop: '20px' }}>
+            Still have something on your mind? Drop me a message — I reply within a few hours.
+          </p>
+          <a href="#contact" className="btn-primary" style={{ marginTop: '32px', display: 'inline-flex' }}>
+            <span>Ask Me Directly</span>
+            <span>→</span>
+          </a>
+        </div>
+        <div className="faq-right">
+          {faqs.map((faq, i) => (
+            <FAQItem key={i} faq={faq} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Contact Section ──────────────────────────────────────────────
+function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', budget: '', message: '' });
+  const [sent, setSent] = useState(false);
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
+  return (
+    <section className="contact-section" id="contact">
+      <div className="contact-bg-grid" />
+
+      <div className="contact-inner">
+        {/* Left info */}
+        <div className="contact-left">
+          <p className="section-label">Let's Talk</p>
+          <h2 className="section-title">
+            Ready to build<br />something<br /><span className="accent-word">remarkable?</span>
+          </h2>
+          <p className="about-text" style={{ marginTop: '20px', marginBottom: '40px' }}>
+            Tell me about your project and I will get back to you within 24 hours with ideas, a rough timeline, and a fair quote.
+          </p>
+
+          <div className="contact-info-list">
+            {[
+              { icon: '📧', label: 'Email', value: 'hello@coding.studio' },
+              { icon: '📍', label: 'Location', value: 'Europe (Remote Worldwide)' },
+              { icon: '⏱️', label: 'Response Time', value: 'Within 24 hours' },
+            ].map(item => (
+              <div className="contact-info-item" key={item.label}>
+                <div className="contact-info-icon">{item.icon}</div>
+                <div>
+                  <div className="contact-info-label">{item.label}</div>
+                  <div className="contact-info-value">{item.value}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="contact-socials">
+            {['Dribbble', 'Behance', 'GitHub', 'LinkedIn'].map(s => (
+              <a key={s} href="#contact" className="social-link">{s} ↗</a>
+            ))}
+          </div>
+        </div>
+
+        {/* Right form */}
+        <div className="contact-right">
+          {sent ? (
+            <div className="contact-success">
+              <div className="success-icon">✅</div>
+              <h3 className="success-title">Message sent!</h3>
+              <p className="success-desc">Thanks for reaching out. I will get back to you within 24 hours.</p>
+              <button className="btn-primary" style={{ marginTop: '24px' }} onClick={() => setSent(false)}>
+                <span>Send another</span>
+              </button>
+            </div>
+          ) : (
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <div className="form-row">
+                <div className="form-group">
+                  <label className="form-label">Your Name</label>
+                  <input
+                    className="form-input"
+                    type="text"
+                    name="name"
+                    placeholder="John Doe"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Email Address</label>
+                  <input
+                    className="form-input"
+                    type="email"
+                    name="email"
+                    placeholder="john@company.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Budget Range</label>
+                <select
+                  className="form-input form-select"
+                  name="budget"
+                  value={form.budget}
+                  onChange={handleChange}
+                >
+                  <option value="">Select a budget range</option>
+                  <option>Under €1,000</option>
+                  <option>€1,000 – €3,000</option>
+                  <option>€3,000 – €7,000</option>
+                  <option>€7,000+</option>
+                  <option>Let's discuss</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Tell me about your project</label>
+                <textarea
+                  className="form-input form-textarea"
+                  name="message"
+                  placeholder="What are you building? What's the goal? Any deadline?"
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <button type="submit" className="btn-primary form-submit">
+                <span>Send Message</span>
+                <span>→</span>
+              </button>
+
+              <p className="form-note">No spam, no unsolicited follow-ups. Just a real reply.</p>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Footer ───────────────────────────────────────────────────────
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-top">
+        <div className="footer-brand">
+          <div className="nav-logo" style={{ fontSize: '1.6rem', marginBottom: '16px' }}>
+            Cod<span>][</span>ng
+          </div>
+          <p className="footer-tagline">
+            Design that converts.<br />Code that scales.
+          </p>
+        </div>
+
+        <div className="footer-links-group">
+          <div className="footer-col">
+            <p className="footer-col-title">Navigation</p>
+            {['About', 'Services', 'Portfolio', 'Process', 'Testimonials', 'Contact'].map(l => (
+              <a key={l} href={`#${l.toLowerCase()}`} className="footer-link">{l}</a>
+            ))}
+          </div>
+          <div className="footer-col">
+            <p className="footer-col-title">Services</p>
+            {['UI/UX Design', 'Web Development', 'Graphic Design', 'Brand Identity', 'Motion Design'].map(l => (
+              <a key={l} href="#services" className="footer-link">{l}</a>
+            ))}
+          </div>
+          <div className="footer-col">
+            <p className="footer-col-title">Connect</p>
+            {['Dribbble', 'Behance', 'GitHub', 'LinkedIn', 'Twitter / X'].map(l => (
+              <a key={l} href="#contact" className="footer-link">{l} ↗</a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-divider" />
+
+      <div className="footer-bottom">
+        <p className="footer-copy">© {new Date().getFullYear()} Cod][ng. All rights reserved.</p>
+        <div className="footer-cta-mini">
+          <span className="footer-available-dot" />
+          <span>Available for new projects</span>
+          <a href="#contact" className="footer-cta-link">Start one →</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ─── App ─────────────────────────────────────────────────────────
+function App() {
+  return (
+    <div className="App">
+      <CustomCursor />
+      <Navbar />
+      <Hero />
+      <ProjectSlider />
+      <About />
+      <Services />
+      <Process />
+      <Testimonials />
+      <FAQ />
+      <Contact />
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
