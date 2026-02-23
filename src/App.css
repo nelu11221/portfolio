@@ -492,8 +492,6 @@ body {
   cursor: grab;
   padding-bottom: 4px;
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .slider-track-wrapper::-webkit-scrollbar { display: none; }
@@ -502,7 +500,7 @@ body {
 .slider-track {
   display: flex;
   gap: 24px;
-  padding: 0 calc((100vw - 320px) / 2);
+  padding: 0 60px;
 }
 
 /* ─── PROJECT CARD ─── */
@@ -2349,7 +2347,7 @@ body {
   .slider-section { padding: 60px 0; }
   .slider-header { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
   .slider-controls { align-self: flex-start; margin-top: 4px; }
-  .slider-track { padding: 0 calc((100vw - 280px) / 2); }
+  .slider-track { padding: 0 calc((100vw - 280px) / 2) !important; }
   .project-card { flex: 0 0 calc(100vw - 48px); max-width: 380px; }
   .card-title { font-size: 1rem; }
 
