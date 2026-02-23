@@ -1053,11 +1053,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.06);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   flex-shrink: 0;
+}
+
+.float-icon-blue {
+  background: rgba(79, 110, 247, 0.15);
+  border: 1px solid rgba(79, 110, 247, 0.3);
+  box-shadow: 0 0 12px rgba(79, 110, 247, 0.2);
+}
+
+.float-icon-gold {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
 }
 .float-title { font-size: 0.8rem; font-weight: 700; color: var(--white); }
 .float-sub { font-size: 0.68rem; color: var(--muted); }

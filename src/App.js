@@ -467,14 +467,16 @@ function About() {
             <div className="avatar-ring ring-1" />
             <div className="avatar-ring ring-2" />
             <div className="avatar-float-card card-top">
-              <span className="float-icon">
-                {/* Rocket SVG */}
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C12 2 7 6 7 13H17C17 6 12 2 12 2Z" fill="#4f6ef7" opacity="0.9"/>
-                  <path d="M9 13H15L13.5 20H10.5L9 13Z" fill="#4f6ef7"/>
-                  <path d="M7 13C7 13 4 14 4 17C4 17 6 17 7 16" fill="#00d4ff" opacity="0.8"/>
-                  <path d="M17 13C17 13 20 14 20 17C20 17 18 17 17 16" fill="#00d4ff" opacity="0.8"/>
-                  <circle cx="12" cy="9" r="2" fill="white" opacity="0.9"/>
+              <span className="float-icon float-icon-blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="none" stroke="#4f6ef7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#boltGrad)" opacity="0.15"/>
+                  <defs>
+                    <linearGradient id="boltGrad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#4f6ef7"/>
+                      <stop offset="100%" stopColor="#00d4ff"/>
+                    </linearGradient>
+                  </defs>
                 </svg>
               </span>
               <div>
@@ -483,17 +485,15 @@ function About() {
               </div>
             </div>
             <div className="avatar-float-card card-bottom">
-              <span className="float-icon">
-                {/* Star SVG */}
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L14.9 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L9.1 8.26L12 2Z"
-                    fill="#f59e0b" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 2L14.9 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L9.1 8.26L12 2Z"
-                    fill="url(#starGrad)"/>
+              <span className="float-icon float-icon-gold">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"
+                    fill="url(#goldGrad)" stroke="#f59e0b" strokeWidth="1.2" strokeLinejoin="round"/>
                   <defs>
-                    <linearGradient id="starGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stopColor="#fbbf24"/>
-                      <stop offset="100%" stopColor="#f59e0b"/>
+                    <linearGradient id="goldGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#fde68a"/>
+                      <stop offset="50%" stopColor="#f59e0b"/>
+                      <stop offset="100%" stopColor="#d97706"/>
                     </linearGradient>
                   </defs>
                 </svg>
