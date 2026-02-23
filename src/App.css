@@ -497,12 +497,18 @@ body {
 .slider-track-wrapper:active { cursor: grabbing; }
 
 .slider-track {
-  display: inline-flex;
+  display: flex;
   gap: 24px;
-  /* side padding = (viewport - cardWidth) / 2 so first card is centered */
-  padding-left:  max(60px, calc((100% - 320px) / 2));
-  padding-right: max(60px, calc((100% - 320px) / 2));
-  box-sizing: content-box;
+  /* Use vw so padding is relative to viewport, not track content width */
+  padding-left:  calc((100vw - 320px) / 2);
+  padding-right: calc((100vw - 320px) / 2);
+}
+
+@media (min-width: 769px) {
+  .slider-track {
+    padding-left:  60px;
+    padding-right: 60px;
+  }
 }
 
 /* ─── PROJECT CARD ─── */
