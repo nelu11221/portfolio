@@ -529,46 +529,23 @@ function ProjectCard({ project, onOpen }) {
 // ─── Slider Section ──────────────────────────────────────────────
 function ProjectSlider({ onOpen }) {
   const wrapperRef = useRef(null);
-  const trackRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const touchStart = useRef(0);
   const maxIdx = projects.length - 1;
 
   const getCardWidth = () => {
-    if (!wrapperRef.current) return 404;
+    if (!wrapperRef.current) return 344;
     const card = wrapperRef.current.querySelector('.project-card');
-    if (!card) return 404;
+    if (!card) return 344;
     return card.offsetWidth + 24;
   };
-
-  // Center first card by setting track padding dynamically
-  useEffect(() => {
-    const setCenterPadding = () => {
-      if (!wrapperRef.current || !trackRef.current) return;
-      const card = wrapperRef.current.querySelector('.project-card');
-      if (!card) return;
-      const wrapperW = wrapperRef.current.offsetWidth;
-      const cardW = card.offsetWidth;
-      const pad = Math.max(24, (wrapperW - cardW) / 2);
-      trackRef.current.style.paddingLeft = pad + 'px';
-      trackRef.current.style.paddingRight = pad + 'px';
-    };
-    setCenterPadding();
-    window.addEventListener('resize', setCenterPadding);
-    return () => window.removeEventListener('resize', setCenterPadding);
-  }, []);
 
   const goTo = (idx) => {
     const clamped = Math.max(0, Math.min(idx, maxIdx));
     setActiveIdx(clamped);
     if (!wrapperRef.current) return;
-    const cardW = getCardWidth();
-    const wrapperW = wrapperRef.current.offsetWidth;
-    const card = wrapperRef.current.querySelector('.project-card');
-    const cardVisibleW = card ? card.offsetWidth : 380;
-    const pad = Math.max(24, (wrapperW - cardVisibleW) / 2);
     wrapperRef.current.scrollTo({
-      left: clamped * cardW - (pad - 0),
+      left: clamped * getCardWidth(),
       behavior: 'smooth',
     });
   };
@@ -605,7 +582,7 @@ function ProjectSlider({ onOpen }) {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="slider-track" ref={trackRef}>
+        <div className="slider-track">
           {projects.map((p) => (
             <ProjectCard key={p.id} project={p} onOpen={onOpen} />
           ))}
