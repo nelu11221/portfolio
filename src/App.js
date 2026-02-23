@@ -102,7 +102,7 @@ function Navbar() {
         <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button className="nav-cta">Start a Project</button>
+      <a href="#contact" className="nav-cta">Start a Project</a>
     </nav>
   );
 }
@@ -1027,7 +1027,7 @@ const contactInfoItems = [
 // ─── Contact Section ──────────────────────────────────────────────
 // EmailJS config — replace with your real IDs from emailjs.com
 const EMAILJS_SERVICE_ID  = 'service_w0bf1rd';
-const EMAILJS_TEMPLATE_ID = 'template_xtotbgx';
+const EMAILJS_TEMPLATE_ID = 'template_op0wa7q';
 const EMAILJS_PUBLIC_KEY  = 'dzh_MYVldtKHUDQQG';
 
 function Contact() {
