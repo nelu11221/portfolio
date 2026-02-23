@@ -153,10 +153,11 @@ const projects = [
 ];
 
 // ─── Custom Cursor ───────────────────────────────────────────────
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
 function CustomCursor() {
   const cursorRef = useRef(null);
   const followerRef = useRef(null);
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   useEffect(() => {
     if (isTouchDevice) return;
