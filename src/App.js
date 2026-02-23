@@ -156,8 +156,10 @@ const projects = [
 function CustomCursor() {
   const cursorRef = useRef(null);
   const followerRef = useRef(null);
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   useEffect(() => {
+    if (isTouchDevice) return;
     const onMove = (e) => {
       if (cursorRef.current) {
         cursorRef.current.style.left = e.clientX + 'px';
@@ -182,11 +184,11 @@ function CustomCursor() {
 
 // ─── Navbar ─────────────────────────────────────────────────────
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const close = () => setMenuOpen(false);
   return (
     <nav className="navbar">
-      <div className="nav-logo">
-        Cod<span>][</span>ng
-      </div>
+      <div className="nav-logo">Cod<span>][</span>ng</div>
       <ul className="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
@@ -194,6 +196,22 @@ function Navbar() {
         <li><a href="#contact">Contact</a></li>
       </ul>
       <a href="#contact" className="nav-cta">Start a Project</a>
+      {/* Burger button — mobile only */}
+      <button className="burger" onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
+        <span className={menuOpen ? 'burger-line open-1' : 'burger-line'} />
+        <span className={menuOpen ? 'burger-line open-2' : 'burger-line'} />
+        <span className={menuOpen ? 'burger-line open-3' : 'burger-line'} />
+      </button>
+      {/* Mobile drawer */}
+      {menuOpen && (
+        <div className="mobile-drawer">
+          <a href="#about"     className="mobile-link" onClick={close}>About</a>
+          <a href="#portfolio" className="mobile-link" onClick={close}>Portfolio</a>
+          <a href="#services"  className="mobile-link" onClick={close}>Services</a>
+          <a href="#contact"   className="mobile-link" onClick={close}>Contact</a>
+          <a href="#contact"   className="mobile-drawer-cta" onClick={close}>Start a Project →</a>
+        </div>
+      )}
     </nav>
   );
 }
