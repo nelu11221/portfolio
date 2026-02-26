@@ -933,202 +933,7 @@ function Process() {
   );
 }
 
-// ─── Testimonials Section ────────────────────────────────────────
-const testimonials = [
-  {
-    id: 1,
-    name: 'Sarah Mitchell',
-    role: 'CEO',
-    company: 'Luminary Studio',
-    initials: 'SM',
-    avatarColor: '#4f6ef7',
-    rating: 5,
-    text: 'Working with this team was a game-changer. They completely transformed our brand identity and the new website has tripled our inbound leads in just two months. The attention to detail is on another level.',
-    project: 'Brand Identity + Website',
-    result: '+214% leads',
-    resultColor: '#4f6ef7',
-  },
-  {
-    id: 2,
-    name: 'James Okafor',
-    role: 'Product Manager',
-    company: 'Nexus Labs',
-    initials: 'JO',
-    avatarColor: '#00d4ff',
-    rating: 5,
-    text: "Delivered a complex SaaS dashboard in under 3 weeks on budget, pixel-perfect, and with animations that genuinely impressed our investors. I have worked with many devs and none come close.",
-    project: 'SaaS Dashboard UI',
-    result: 'On time & budget',
-    resultColor: '#00d4ff',
-  },
-  {
-    id: 3,
-    name: 'Elena Rousseau',
-    role: 'Founder',
-    company: 'FitTrack App',
-    initials: 'ER',
-    avatarColor: '#7c3aed',
-    rating: 5,
-    text: "The mobile UI they designed for us has a 4.9 star rating on the App Store. Users specifically mention how intuitive it feels. That does not happen by accident — it is the result of real craft and user empathy.",
-    project: 'Mobile App UI/UX',
-    result: '4.9 App Store',
-    resultColor: '#7c3aed',
-  },
-  {
-    id: 4,
-    name: 'Marco Delgado',
-    role: 'Marketing Director',
-    company: 'Vertex Agency',
-    initials: 'MD',
-    avatarColor: '#f59e0b',
-    rating: 5,
-    text: "Our agency site went from embarrassing to award-worthy. We submitted to Awwwards two weeks after launch and got Honorable Mention. Clients now come to us citing the website specifically.",
-    project: 'Agency Website',
-    result: 'Awwwards HM',
-    resultColor: '#f59e0b',
-  },
-  {
-    id: 5,
-    name: 'Priya Nair',
-    role: 'Head of Design',
-    company: 'ShopFlow',
-    initials: 'PN',
-    avatarColor: '#10b981',
-    rating: 5,
-    text: 'The e-commerce redesign increased our conversion rate by 38% in the first month. The checkout flow is so smooth that cart abandonment dropped by half. ROI on this project was immediate.',
-    project: 'E-commerce Redesign',
-    result: '+38% conversion',
-    resultColor: '#10b981',
-  },
-];
 
-function StarRating({ count }) {
-  return (
-    <div className="star-rating">
-      {Array.from({ length: count }).map((_, i) => (
-        <span key={i} className="star">★</span>
-      ))}
-    </div>
-  );
-}
-
-function TestimonialCard({ testimonial, isActive }) {
-  return (
-    <div className={`testi-card${isActive ? ' testi-active' : ''}`}>
-      <div className="testi-quote-mark">"</div>
-      <StarRating count={testimonial.rating} />
-      <p className="testi-text">{testimonial.text}</p>
-      <div
-        className="testi-result-badge"
-        style={{
-          background: `${testimonial.resultColor}15`,
-          color: testimonial.resultColor,
-          borderColor: `${testimonial.resultColor}30`,
-        }}
-      >
-        <span className="testi-result-dot" style={{ background: testimonial.resultColor }} />
-        {testimonial.result}
-      </div>
-      <div className="testi-footer">
-        <div className="testi-avatar" style={{ background: `${testimonial.avatarColor}18`, border: `1px solid ${testimonial.avatarColor}40` }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="8" r="4" fill={testimonial.avatarColor} opacity="0.9"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke={testimonial.avatarColor} strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.7"/>
-          </svg>
-        </div>
-        <div className="testi-author">
-          <div className="testi-name">{testimonial.name}</div>
-          <div className="testi-meta">{testimonial.role} · {testimonial.company}</div>
-        </div>
-        <div className="testi-project-tag">{testimonial.project}</div>
-      </div>
-    </div>
-  );
-}
-
-function Testimonials() {
-  const [active, setActive] = useState(0);
-  const [animating, setAnimating] = useState(false);
-
-  const goTo = (idx) => {
-    if (animating) return;
-    setAnimating(true);
-    setTimeout(() => {
-      setActive(idx);
-      setAnimating(false);
-    }, 220);
-  };
-
-  const prev = () => goTo((active - 1 + testimonials.length) % testimonials.length);
-  const next = () => goTo((active + 1) % testimonials.length);
-
-
-  const visible = [
-    (active - 1 + testimonials.length) % testimonials.length,
-    active,
-    (active + 1) % testimonials.length,
-  ];
-
-  return (
-    <section className="testi-section" id="testimonials">
-      <div className="testi-bg-glow" />
-
-      <div className="section-header-center">
-        <p className="section-label">Social Proof</p>
-        <h2 className="section-title">
-          Don't take my<br />word for it —<br /><span className="accent-word">theirs.</span>
-        </h2>
-        <p className="section-subtitle">
-          Real results from real clients. Every number is verified, every quote is genuine.
-        </p>
-      </div>
-
-      <div className="testi-stats-row">
-        {[
-          { num: '48+', label: 'Happy Clients' },
-          { num: '5.0', label: 'Average Rating' },
-          { num: '100%', label: 'On-time Delivery' },
-          { num: '+38%', label: 'Avg. Conversion Lift' },
-        ].map(s => (
-          <div className="testi-stat" key={s.label}>
-            <div className="testi-stat-num">{s.num}</div>
-            <div className="testi-stat-label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="testi-stage">
-        <button className="testi-nav-btn" onClick={prev}>←</button>
-
-        <div className={`testi-cards-wrap${animating ? ' testi-fade' : ''}`}>
-          {visible.map((idx, pos) => (
-            <div
-              key={idx}
-              className={`testi-slot testi-slot-${pos}`}
-              onClick={() => pos !== 1 && goTo(idx)}
-            >
-              <TestimonialCard testimonial={testimonials[idx]} isActive={pos === 1} />
-            </div>
-          ))}
-        </div>
-
-        <button className="testi-nav-btn" onClick={next}>→</button>
-      </div>
-
-      <div className="slider-dots" style={{ marginTop: '40px' }}>
-        {testimonials.map((_, i) => (
-          <button
-            key={i}
-            className={`dot${i === active ? ' active' : ''}`}
-            onClick={() => goTo(i)}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// ─── App ─────────────────────────────────────────────────────────
 // ─── FAQ Section ─────────────────────────────────────────────────
 const faqs = [
   {
@@ -1378,7 +1183,7 @@ function Footer() {
         <div className="footer-links-group">
           <div className="footer-col">
             <p className="footer-col-title">Navigation</p>
-            {['About', 'Services', 'Portfolio', 'Process', 'Testimonials', 'Contact'].map(l => (
+            {['About', 'Services', 'Portfolio', 'Process', 'Contact'].map(l => (
               <a key={l} href={`#${l.toLowerCase()}`} className="footer-link">{l}</a>
             ))}
           </div>
@@ -1443,7 +1248,6 @@ function App() {
       <About />
       <Services />
       <Process />
-      <Testimonials />
       <FAQ />
       <Contact />
       <Footer />
