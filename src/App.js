@@ -1096,9 +1096,14 @@ function Contact() {
           </div>
 
           <div className="contact-socials">
-            {['Dribbble', 'Behance'].map(s => (
-              <a key={s} href="#contact" className="social-link">{s} ↗</a>
-            ))}
+            <a href="#contact" className="social-link">
+              <img src="/images/dribbble.svg" alt="Dribbble" className="social-link-icon" />
+              Dribbble
+            </a>
+            <a href="#contact" className="social-link">
+              <img src="/images/behance.svg" alt="Behance" className="social-link-icon" />
+              Behance
+            </a>
           </div>
         </div>
 

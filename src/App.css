@@ -1715,6 +1715,9 @@ body {
 }
 
 .social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   padding: 8px 16px;
   border: 1px solid var(--border);
   border-radius: 100px;
@@ -1723,6 +1726,18 @@ body {
   text-decoration: none;
   transition: all 0.3s ease;
   letter-spacing: 0.02em;
+}
+
+.social-link-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  filter: invert(1);
+}
+
+.social-link:hover .social-link-icon {
+  opacity: 1;
 }
 
 .social-link:hover {
