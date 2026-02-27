@@ -7,15 +7,15 @@ const projects = [
     id: 1,
     image: '/images/project1.jpg',
     tags: ['UI/UX Design', 'React'],
-    title: 'ShopFlow – E-commerce Redesign',
+    title: 'Nymb Ecosystem',
     desc: 'Full redesign of a fashion e-commerce platform, boosting conversion rate by 38%.',
-    year: '2024',
-    client: 'ShopFlow Inc.',
-    duration: '6 weeks',
+    year: '2025',
+    client: 'Nymb',
+    duration: '1 weeks',
     role: 'UI/UX Designer & Frontend Developer',
-    overview: 'ShopFlow came to us with a dated e-commerce platform that was bleeding potential customers. The checkout abandonment rate was over 70% and the mobile experience was practically unusable. We rebuilt everything from the ground up — research, architecture, design system, and React implementation.',
-    challenge: 'The core challenge was simplifying a 9-step checkout process without losing the trust signals and upsell opportunities the business depended on. Every decision had to be validated against real user data.',
-    solution: 'We condensed checkout to 3 steps using a progressive disclosure pattern, redesigned the product pages with social proof at every scroll point, and rebuilt the mobile nav from scratch using thumb-zone research.',
+    overview: 'Nymb set out to turn time into measurable digital value through tokenization and gamification. The goal was to build a clear, compelling digital presence for a complex Web3 ecosystem connecting social interaction, rewards, and physical products. We designed the brand direction, UX structure, and high-impact landing experience from the ground up.',
+    challenge: 'The main challenge was simplifying a multi-layer ecosystem — Telegram mini-app, social network, and physical products — without overwhelming users. We needed to make tokenized value feel intuitive, trustworthy, and future-focused while maintaining a bold, innovative identity.',
+    solution: 'We created a conversion-focused ecosystem experience built around clarity and progression. Structured the roadmap into clear product phases. Simplified messaging into benefit-driven communication. Designed a scalable, futuristic UI system. Optimized the landing flow for engagement and investor alignment. The result is a cohesive digital foundation that positions Nymb as a scalable, forward-thinking ecosystem.',
     results: [
       { label: 'Conversion Rate', value: '+38%' },
       { label: 'Cart Abandonment', value: '-52%' },
@@ -191,9 +191,9 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-logo">Cod<span>][</span>ng</div>
       <ul className="nav-links">
+        <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <a href="#contact" className="nav-cta">Start a Project</a>
@@ -206,8 +206,8 @@ function Navbar() {
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="mobile-drawer">
-          <a href="#about"     className="mobile-link" onClick={close}>About</a>
           <a href="#portfolio" className="mobile-link" onClick={close}>Portfolio</a>
+          <a href="#about"     className="mobile-link" onClick={close}>About</a>
           <a href="#services"  className="mobile-link" onClick={close}>Services</a>
           <a href="#contact"   className="mobile-link" onClick={close}>Contact</a>
           <a href="#contact"   className="mobile-drawer-cta" onClick={close}>Start a Project →</a>
@@ -335,7 +335,7 @@ function Hero() {
       <div className="hero-content">
         <div className="hero-badge">
           <span className="badge-dot" />
-          Available for projects · 2025
+          Available for projects · 2026
         </div>
 
         <h1 className="hero-title">
@@ -732,8 +732,8 @@ const services = [
   {
     icon: '/images/react.svg',
     title: 'Website Development',
-    desc: 'Fast, accessible, SEO-ready websites built with React or Next.js. Every build is optimized for performance and scalability.',
-    features: ['React / Next.js', 'Responsive Design', 'Performance', 'SEO Ready'],
+    desc: 'Fast, accessible websites built with React or Next.js. Every build is optimized for performance and scalability.',
+    features: ['React / Next.js', 'Responsive Design', 'Performance'],
     accent: '#00d4ff',
     featured: true,
   },
@@ -938,7 +938,7 @@ function Process() {
 const faqs = [
   {
     q: 'How long does a typical project take?',
-    a: 'It depends on scope — a landing page can be done in 5–7 days, while a full product design + dev build typically takes 3–6 weeks. I give you a precise timeline after our discovery call, and I stick to it.',
+    a: 'It depends on scope — a landing page can be done in 3–7 days, while a full product design + dev build typically takes 1–3 weeks. I give you a precise timeline after our discovery call, and I stick to it.',
   },
   {
     q: 'Do you work with clients outside of Europe?',
@@ -958,7 +958,7 @@ const faqs = [
   },
   {
     q: 'What is your pricing like?',
-    a: 'Projects are quoted fixed-price based on scope, so you always know the total upfront — no surprise invoices. Landing pages start around €800, full websites from €2,500. Book a call and I will send a detailed quote within 24 hours.',
+    a: 'Projects are quoted fixed-price based on scope, so you always know the total upfront — no surprise invoices. Landing pages start around €100, full websites from €400. Book a call and I will send a detailed quote within 24 hours.',
   },
 ];
 
@@ -1096,7 +1096,7 @@ function Contact() {
           </div>
 
           <div className="contact-socials">
-            {['Dribbble', 'Behance', 'GitHub', 'LinkedIn'].map(s => (
+            {['Dribbble', 'Behance'].map(s => (
               <a key={s} href="#contact" className="social-link">{s} ↗</a>
             ))}
           </div>
@@ -1135,10 +1135,9 @@ function Contact() {
                 <label className="form-label">Budget Range</label>
                 <select className="form-input form-select" name="budget" value={form.budget} onChange={handleChange}>
                   <option value="">Select a budget range</option>
-                  <option>Under €1,000</option>
-                  <option>€1,000 – €3,000</option>
-                  <option>€3,000 – €7,000</option>
-                  <option>€7,000+</option>
+                  <option>Under €400</option>
+                  <option>€400 – €1000</option>
+                  <option>€1,000+</option>
                   <option>Let's discuss</option>
                 </select>
               </div>
@@ -1189,13 +1188,13 @@ function Footer() {
           </div>
           <div className="footer-col">
             <p className="footer-col-title">Services</p>
-            {['UI/UX Design', 'Web Development', 'Graphic Design', 'Brand Identity', 'Motion Design'].map(l => (
+            {['UI/UX Design', 'Web Development', 'Graphic Design', 'Brand Identity'].map(l => (
               <a key={l} href="#services" className="footer-link">{l}</a>
             ))}
           </div>
           <div className="footer-col">
             <p className="footer-col-title">Connect</p>
-            {['Dribbble', 'Behance', 'GitHub', 'LinkedIn', 'Twitter / X'].map(l => (
+            {['Dribbble', 'Behance'].map(l => (
               <a key={l} href="#contact" className="footer-link">{l} ↗</a>
             ))}
           </div>
