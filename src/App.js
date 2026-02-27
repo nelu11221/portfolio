@@ -1200,7 +1200,7 @@ function Footer() {
           <div className="footer-col">
             <p className="footer-col-title">Connect</p>
             {['Dribbble', 'Behance'].map(l => (
-              <a key={l} href="#contact" className="footer-link">{l} ↗</a>
+              <a key={l} href="#contact" className="footer-link">{l}</a>
             ))}
           </div>
         </div>
