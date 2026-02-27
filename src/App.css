@@ -1731,9 +1731,8 @@ body {
 .social-link-icon {
   width: 16px;
   height: 16px;
-  opacity: 0.6;
+  opacity: 1;
   transition: opacity 0.3s ease;
-  filter: invert(1);
 }
 
 .social-link:hover .social-link-icon {
